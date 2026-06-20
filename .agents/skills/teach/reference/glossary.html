@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Git 术语表</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<h1>Git 术语表</h1>
+
+<p>每个术语附一句话定义 + 用你自己的话解释的空间。</p>
+
+<h2>核心概念</h2>
+
+<table>
+<tr><th>术语</th><th>定义</th></tr>
+<tr>
+  <td><strong>repository（仓库）</strong></td>
+  <td>Git 的数据库——存在 <code>.git/</code> 目录下，包含所有 commit 历史和配置。你可以把它想象成一个"快照档案馆"。</td>
+</tr>
+<tr>
+  <td><strong>commit（提交）</strong></td>
+  <td>项目在某一个时刻的完整快照，附带作者、时间戳、提交信息和父 commit 的引用。每个 commit 有一个 SHA-1 哈希作为唯一 ID（如 <code>a3f2b91c</code>）。</td>
+</tr>
+<tr>
+  <td><strong>working directory（工作目录）</strong></td>
+  <td>你电脑上正在编辑的实际文件夹。Git 监视它，但不自动保存——你需要手动告诉 Git 哪些改动要放进下一个 commit。</td>
+</tr>
+<tr>
+  <td><strong>staging area / index（暂存区）</strong></td>
+  <td>一个"购物车"——你挑好哪些文件改动要放进下一张快照。通过 <code>git add</code> 添加，通过 <code>git commit</code> 正式拍进历史。</td>
+</tr>
+<tr>
+  <td><strong>branch（分支）</strong></td>
+  <td>一个指向某个 commit 的移动标签。当你做新 commit 时，当前 branch 自动向前移动。默认 branch 通常叫 <code>main</code>。</td>
+</tr>
+<tr>
+  <td><strong>HEAD</strong></td>
+  <td>一个特殊的指针，指向"你现在在哪"。通常是某个 branch，也可能直接指向某个 commit（detached HEAD）。</td>
+</tr>
+<tr>
+  <td><strong>remote（远程）</strong></td>
+  <td>另一个 Git 仓库的引用，通常在一台远程服务器上（如 GitHub）。用于同步——<code>push</code> 上传，<code>pull</code>/<code>fetch</code> 下载。</td>
+</tr>
+</table>
+
+<h2>基础操作</h2>
+
+<table>
+<tr><th>命令</th><th>做什么</th></tr>
+<tr>
+  <td><code>git init</code></td>
+  <td>在当前目录创建一个新的 Git 仓库（生成 <code>.git/</code> 目录）。</td>
+</tr>
+<tr>
+  <td><code>git add &lt;file&gt;</code></td>
+  <td>将文件的改动加入暂存区。"我选了这些文件放进下一张照片。"</td>
+</tr>
+<tr>
+  <td><code>git commit -m "msg"</code></td>
+  <td>将暂存区的内容拍成一张新快照，附上信息。"咔嚓——拍了。"</td>
+</tr>
+<tr>
+  <td><code>git status</code></td>
+  <td>显示工作目录和暂存区的状态——哪些改了、哪些在暂存区、哪些还没追踪。</td>
+</tr>
+<tr>
+  <td><code>git log</code></td>
+  <td>查看 commit 历史链。"翻阅以前的照片。"</td>
+</tr>
+<tr>
+  <td><code>git diff</code></td>
+  <td>显示具体改了什么——工作目录 vs 暂存区，或暂存区 vs 最新 commit。</td>
+</tr>
+</table>
+
+<div class="nav">
+  <a href="../lessons/0001-what-is-git.html">← Lesson 1</a>
+  <a href="./glossary.html">📖 术语表（当前）</a>
+</div>
+
+</body>
+</html>

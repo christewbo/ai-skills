@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 3 · Branch 实战</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<h1>Branch 实战<small>Lesson 3 · 安全区是怎么工作的</small></h1>
+
+<p>上节课你提了一个关键问题：删 branch 不会删代码，那它怎么起到"安全区"的效果？答案在这节课里——<strong>切换 branch 时，Git 会替换你的工作目录</strong>。</p>
+
+<h2>branch 的三个操作</h2>
+
+<table>
+<tr><th>操作</th><th>命令</th><th>做什么</th></tr>
+<tr>
+  <td>创建分支</td>
+  <td><code>git branch &lt;name&gt;</code></td>
+  <td>在当前 commit 上贴一个新标签。注意：<strong>不切换</strong>过去，你还在原来的 branch 上。</td>
+</tr>
+<tr>
+  <td>切换分支</td>
+  <td><code>git switch &lt;name&gt;</code></td>
+  <td>把 HEAD 移到那个 branch，<strong>同时把工作目录替换成那个 commit 的快照</strong>。这就是"安全区生效"的关键。</td>
+</tr>
+<tr>
+  <td>创建并切换</td>
+  <td><code>git switch -c &lt;name&gt;</code></td>
+  <td>= branch + switch 二合一。最常用的方式。</td>
+</tr>
+<tr>
+  <td>删除分支</td>
+  <td><code>git branch -d &lt;name&gt;</code></td>
+  <td>撕掉标签。如果该 branch 上有没合并的 commit，Git 会拒绝删除（保护你）。</td>
+</tr>
+</table>
+
+<h2>完整演示：安全区的运作</h2>
+
+<p>跟着每一步在你的终端里跑一遍。每一步后面都有解释。</p>
+
+<h3>场景设定</h3>
+
+<pre><code>git init demo && cd demo
+echo "print('hello')" &gt; main.py
+git add . && git commit -m "初始版本"
+
+# 当前状态：
+# A (初始版本)
+# ↑
+# main → A</code></pre>
+
+<h3>1. 创建实验 branch</h3>
+
+<pre><code>git switch -c experiment</code></pre>
+
+<p>现在 <code>main</code> 和 <code>experiment</code> 都指向同一个 commit A。HEAD 在 <code>experiment</code> 上——下一次 commit 会让 <code>experiment</code> 往前走，<code>main</code> 原地不动。</p>
+
+<h3>2. 在 experiment 上写"烂代码"</h3>
+
+<pre><code>echo "println!(broken rust in python file?!);;" &gt;&gt; main.py
+git add . && git commit -m "实验：乱写一通"</code></pre>
+
+<p>当前状态：</p>
+
+<div class="diagram">
+<pre>
+A (初始版本) ←── B (实验：乱写一通)
+↑                   ↑
+main              experiment (HEAD)
+</pre>
+</div>
+
+<p><code>main.py</code> 现在的内容：</p>
+<pre><code>print('hello')
+println!(broken rust in python file?!);;   ← 烂代码</code></pre>
+
+<h3>3. 切回 main——魔法发生</h3>
+
+<pre><code>git switch main</code></pre>
+
+<p>再看 <code>main.py</code>：</p>
+<pre><code>print('hello')
+# 烂代码消失了！</code></pre>
+
+<p>Git 做了三件事：</p>
+<ol>
+  <li>把 HEAD 移到 <code>main</code></li>
+  <li><strong>把工作目录里的所有文件替换成 commit A 的快照</strong></li>
+  <li>你看到的就是干净版本，就像 experiment 上什么都没发生过</li>
+</ol>
+
+<h3>4. 删掉 experiment</h3>
+
+<pre><code>git branch -d experiment</code></pre>
+
+<p>B 失去所有标签，变成孤儿 commit。Git 的垃圾回收最终会清理它。</p>
+
+<div class="diagram">
+<pre>
+A ←── B (孤儿，待回收)
+↑
+main (HEAD)
+</pre>
+</div>
+
+<p>你回到了干净状态，就像那场实验从没发生过。</p>
+
+<h2>安全区的完整逻辑</h2>
+
+<table>
+<tr><th>步骤</th><th>发生了什么</th></tr>
+<tr><td>创建 branch</td><td>给当前 commit 贴一个新标签，工作目录不变</td></tr>
+<tr><td>在新 branch 上 commit</td><td>新快照存在新 branch 的线上，其他 branch 不受影响</td></tr>
+<tr><td>切回原 branch</td><td><strong>工作目录被替换成原 branch 的快照</strong>——烂代码从你的文件里消失了</td></tr>
+<tr><td>删除 branch</td><td>标签消失，没合并的 commit 变成孤儿，最终被回收</td></tr>
+</table>
+
+<div class="note">
+<div class="note-title">什么时候 Git 会拒绝切换？</div>
+<p>如果你在 experiment 上改了一个文件但还没 commit，直接 <code>git switch main</code> 会失败——Git 不想丢掉你的未保存改动。你有三个选择：</p>
+<ul>
+  <li><code>git commit</code> 先保存</li>
+  <li><code>git stash</code> 暂存起来</li>
+  <li><code>git switch -f main</code> 强制切，放弃改动</li>
+</ul>
+<p>这是另一个保护机制——Git 默认<strong>不会</strong>让你不小心丢代码。</p>
+</div>
+
+<h2>branch 和你的备份目标</h2>
+
+<p>在日常使用中，用 branch 的最简模式是：</p>
+
+<ol>
+  <li><code>main</code> 永远保持可工作状态——随时可以 push 到 GitHub 做备份</li>
+  <li>每次做新东西，从 <code>main</code> 开一个 branch（<code>git switch -c new-feature</code>）</li>
+  <li>在 branch 上 commit、push（备份到 GitHub）——坏了也不怕</li>
+  <li>做好了就切回 <code>main</code> 合并；做烂了就删掉 branch，代码回到 main 状态</li>
+</ol>
+
+<h2>检查理解 ✏️</h2>
+
+<ol>
+  <li><code>git switch main</code> 执行时，除了移动 HEAD，还对工作目录做了什么？</li>
+  <li><code>git branch -d experiment</code> 被 Git 拒绝不执行，可能是什么原因？</li>
+  <li>你在 <code>experiment</code> 上改了一个文件但还没 commit。此时 <code>git switch main</code> 会发生什么？</li>
+</ol>
+
+<div class="nav">
+  <a href="./0002-remote-and-push.html">← Lesson 2</a>
+  <a href="./0003-branches.html">Lesson 3（当前）</a>
+  <a href="../reference/glossary.html">📖 术语表</a>
+  <span style="float:right">下一课：Lesson 4 →</span>
+</div>
+
+<div class="footer">
+  <p><strong>推荐阅读：</strong> <em>Pro Git</em> 第 3.1 节 "Branches in a Nutshell"。<a href="https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell">git-scm.com/book</a>。</p>
+  <p><strong>交互练习：</strong> <a href="https://learngitbranching.js.org/">Learn Git Branching</a> —— 在浏览器里可视化操作 branch。</p>
+  <p>有问题？直接问你的 AI agent。</p>
+</div>
+
+</body>
+</html>

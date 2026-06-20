@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 2 · 远程仓库与备份</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<h1>远程仓库与备份<small>Lesson 2 · 让快照离开你的电脑</small></h1>
+
+<p><a href="./0001-what-is-git.html">上一课</a>讲的 commit 链全在你的电脑上，藏在 <code>.git/</code> 文件夹里。这已经很安全了——但你的电脑坏了呢？被偷了呢？你需要<strong>另一份副本放在另一个地方</strong>。这就是 <strong>remote</strong>（远程仓库）的作用。</p>
+
+<h2>remote 就是另一个 Git 仓库</h2>
+
+<p>技术上，"remote"一点也不特殊——它<strong>就是另一个 Git 仓库</strong>，只是恰好不在你的电脑上。通常在 GitHub、GitLab 或一台服务器上。</p>
+
+<div class="diagram">
+<pre>
+你的电脑 (local)                     GitHub (remote)
+
+A ←── B ←── C ←── D               A ←── B ←── C ←── D
+              ↑                                  ↑
+             main                                main
+
+             │                                  │
+             └──────── git push ────────────────→┘
+             ←──────── git pull ────────────────┘
+</pre>
+</div>
+
+<div class="note">
+<div class="note-title">关键洞察：remote 和你本地是平等的</div>
+<p>GitHub 上的仓库不是"主"副本。你的本地仓库和 remote 是<strong>对等的</strong>——各自拥有一套完整历史。这和 Dropbox 不同——Dropbox 是"云端是主，本地是缓存"。Git 是"两边都是完整数据库，通过 push/pull 互相同步"。</p>
+</div>
+
+<h2>三个基本操作</h2>
+
+<table>
+<tr><th>操作</th><th>方向</th><th>做什么</th></tr>
+<tr>
+  <td><code>git push</code></td>
+  <td>本地 → remote</td>
+  <td>把你本地的新 commit 发送到 remote。"把照片传一份到云端。"</td>
+</tr>
+<tr>
+  <td><code>git fetch</code></td>
+  <td>remote → 本地</td>
+  <td>下载 remote 上你还没有的 commit，但不改动你的工作目录。"看看云端有什么新东西。"</td>
+</tr>
+<tr>
+  <td><code>git pull</code></td>
+  <td>remote → 本地</td>
+  <td>= <code>fetch</code> + 自动把你的工作目录更新到最新。"把云端的新东西拿来并应用到我的代码上。"</td>
+</tr>
+</table>
+
+<p>对备份场景来说，你现在只需要关心 <code>push</code>。fetch 和 pull 是多人协作时用的——先知道它们存在就行。</p>
+
+<h2>完整流程：从零到备份</h2>
+
+<p>假设你有一个项目目录 <code>my-project/</code>，里面已经有代码。把它变成"安全已备份"状态只需要四步：</p>
+
+<h3>Step 1: 在 GitHub 上创建空仓库</h3>
+
+<p>打开 GitHub → 点右上角 <strong>+</strong> → <strong>New repository</strong> → 起个名字（比如 <code>my-project</code>）→ <strong>不要</strong>勾选 "Add a README file" → 点 Create。</p>
+
+<p>GitHub 会显示一段类似这样的指引，其中有一个 URL：</p>
+
+<pre><code>https://github.com/你的用户名/my-project.git</code></pre>
+
+<p>这就是 remote 的地址。</p>
+
+<h3>Step 2: 初始化本地 Git</h3>
+
+<pre><code>cd my-project
+git init</code></pre>
+
+<h3>Step 3: 做第一次 commit</h3>
+
+<pre><code>git add .
+git commit -m "初始版本"</code></pre>
+
+<h3>Step 4: 关联 remote 并 push</h3>
+
+<pre><code>git remote add origin https://github.com/你的用户名/my-project.git
+git push -u origin main</code></pre>
+
+<p>拆解一下这两行：</p>
+
+<ul>
+  <li><code>git remote add origin &lt;URL&gt;</code> — 给你的本地仓库添加一个指向远程地址的引用，起个名叫 <code>origin</code>（约定俗成的名字，意思是"来源"）。你本地可以有多个 remote，但通常一个就够了。</li>
+  <li><code>git push -u origin main</code> — 把你本地的 <code>main</code> 分支推到 <code>origin</code> 上。<code>-u</code> 的意思是"记住这个配对"——今后你只敲 <code>git push</code> 就够了，不用每次指定 remote 和 branch。</li>
+</ul>
+
+<p>之后每次你做了新的 commit，只需要：</p>
+
+<pre><code>git push</code></pre>
+
+<p>就行了。</p>
+
+<h2>clone：从零获取一份副本</h2>
+
+<p>如果你换了新电脑，或者同事想拿你的代码：</p>
+
+<pre><code>git clone https://github.com/你的用户名/my-project.git</code></pre>
+
+<p>这做了三件事：</p>
+<ol>
+  <li>创建一个 <code>my-project/</code> 文件夹</li>
+  <li>下载整个仓库（所有 commit 历史 + 所有文件）</li>
+  <li>自动把工作目录设到最新 commit</li>
+</ol>
+
+<div class="note">
+<div class="note-title">clone 下来的是什么？</div>
+<p>clone 拿到的是<strong>完整仓库</strong>——整个 commit 链、所有 branch、所有标签，全在你本地。你不依赖 GitHub 也能查看完整历史。GitHub 挂了？你本地有一切。</p>
+</div>
+
+<h2>你的备份工作流</h2>
+
+<p>结合你的目标——通过 AI agent 安全备份代码——标准操作是：</p>
+
+<div class="diagram">
+<pre>
+1. AI agent 写代码
+       ↓
+2. git add + git commit  （拍快照，附上说明）
+       ↓
+3. git push              （推到 GitHub）
+       ↓
+4. 代码物理上存在于两个地方：你的电脑 + GitHub 的服务器
+</pre>
+</div>
+
+<p>你的数据现在有三层保护：</p>
+<ul>
+  <li><strong>commit 链的完整性校验</strong>——数据损坏能被发现</li>
+  <li><strong>完整快照历史</strong>——可以回到任何时间点</li>
+  <li><strong>地理冗余</strong>——本地和 remote 是两份独立的物理副本</li>
+</ul>
+
+<h2>检查理解 ✏️</h2>
+
+<ol>
+  <li>remote 仓库和本地仓库之间是什么关系？（提示：不是"主从"）</li>
+  <li><code>git push</code> 和 <code>git pull</code> 的方向各是什么？</li>
+  <li><code>git clone</code> 拿到的是完整仓库还是只是一个文件副本？</li>
+  <li>如果你只做 <code>git commit</code> 而不做 <code>git push</code>，备份在哪？如果电脑坏了能恢复吗？</li>
+</ol>
+
+<div class="nav">
+  <a href="./0001-what-is-git.html">← Lesson 1</a>
+  <a href="./0002-remote-and-push.html">Lesson 2（当前）</a>
+  <a href="../reference/glossary.html">📖 术语表</a>
+  <span style="float:right">下一课：Lesson 3 →</span>
+</div>
+
+<div class="footer">
+  <p><strong>推荐阅读：</strong> <em>Pro Git</em> 第 2.5 节 "Working with Remotes"。<a href="https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes">git-scm.com/book</a>。</p>
+  <p>有问题？直接问你的 AI agent。</p>
+</div>
+
+</body>
+</html>

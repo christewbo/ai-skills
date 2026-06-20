@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 1 · Git 是什么</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<h1>Git 是什么<small>Lesson 1 · 心智模型，不是命令清单</small></h1>
+
+<p>大多数人学 Git 是从命令开始的——<code>git add</code>、<code>git commit</code>、<code>git push</code>。这很自然，但也很危险。命令忘记了可以查，但如果你不知道 Git <em>在做什么</em>，每次报错都像撞墙。</p>
+
+<p>这节课不讲命令。我们建立 Git 的<strong>心智模型</strong>——它到底是什么、怎么组织数据、以及为什么它是安全的。这个模型会是你以后理解所有 Git 操作的基础。</p>
+
+<h2>Git 是一个快照链</h2>
+
+<p>把 Git 想象成一个<strong>自动拍照的相机</strong>。</p>
+
+<p>每次你按快门，Git 拍下整个项目的<b>完整快照</b>（snapshot）——所有文件，所有文件夹，当时的样子。然后它把这张照片串在一根链条上。下一张照片指向前一张，再下一张指向这张……形成一条不可篡改的历史链。</p>
+
+<div class="diagram">
+<pre>
+o --- o --- o --- o
+|      |      |      |
+快照A   快照B   快照C   快照D
+(每个快照包含全部文件的完整副本)
+</pre>
+</div>
+
+<p>这张照片在 Git 里叫 <strong>commit</strong>（提交）。一个 commit 包含：</p>
+
+<table>
+<tr><th>组成部分</th><th>内容</th></tr>
+<tr><td>文件快照</td><td>那一刻所有被追踪文件的完整内容</td></tr>
+<tr><td>作者</td><td>谁拍的（名字 + 邮箱）</td></tr>
+<tr><td>时间戳</td><td>什么时候拍的</td></tr>
+<tr><td>提交信息</td><td>一段文字说明，解释为什么拍</td></tr>
+<tr><td>父指针</td><td>指向上一个 commit 的链接</td></tr>
+</table>
+
+<div class="note">
+<div class="note-title">关键洞察：Git 存的是完整快照，不是差异</div>
+<p>很多版本控制系统存的是"文件 A 改了第 3 行，文件 B 删了第 5 行"这种差异。Git <em>不</em>这样做——它每次存的是整个项目的完整副本。这听起来浪费空间，但 Git 在背后做了极致压缩（相同内容只存一份）。"存快照"这个设计让 Git 非常快、非常安全——你随时可以回到任何一个历史瞬间。</p>
+</div>
+
+<h2>三个区域：工作区、暂存区、仓库</h2>
+
+<p>Git 把你的项目分成三个"区域"：</p>
+
+<div class="diagram">
+<pre>
+┌──────────────┐    git add    ┌──────────────┐   git commit   ┌──────────────┐
+│              │  ───────────→ │              │ ─────────────→ │              │
+│   工作目录    │               │    暂存区     │                │    仓库       │
+│ Working Dir  │               │  Staging     │                │  Repository  │
+│              │               │              │                │              │
+│ 你正在编辑    │               │ 你选好了      │                │ 历史快照链    │
+│ 的文件       │               │ 下一张照片    │                │              │
+│              │               │ 要拍哪些      │                │              │
+└──────────────┘               └──────────────┘                └──────────────┘
+      ↑                                                             │
+      └─────────────────────────────────────────────────────────────┘
+                            git checkout / git restore
+                        (从历史中恢复某个版本到工作区)
+</pre>
+</div>
+
+<ul>
+  <li><strong>工作目录</strong>（Working Directory）— 你电脑上的实际文件夹。你编辑代码的地方。Git 不自动管这里发生了什么。</li>
+  <li><strong>暂存区</strong>（Staging Area / Index）— 一个"购物车"。你挑好哪些改动要放进下一张照片。这一步是<em>手动</em>的——你决定拍什么。</li>
+  <li><strong>仓库</strong>（Repository / <code>.git/</code>）— 快照链存放的地方。存在项目根目录下一个叫 <code>.git/</code> 的隐藏文件夹里。这是 Git 的"数据库"。</li>
+</ul>
+
+<div class="note">
+<div class="note-title">为什么要有暂存区？</div>
+<p>因为没有暂存区，你每次只能把所有改动都拍进一张照片。有了暂存区，你可以把一个大改动拆成多张逻辑清晰的小照片——比如"修复了登录 bug"是一张，"重构了样式"是另一张。这让历史可读，也容易回退。</p>
+</div>
+
+<h2>commit 之间的指针链</h2>
+
+<p>每个 commit 都知道自己的"父亲"是谁——这就是<strong>父指针</strong>。这形成了一条只能往前长的单向链：</p>
+
+<div class="diagram">
+<pre>
+A  ←──  B  ←──  C  ←──  D
+│       │       │       │
+v1.0   加了    修了    加了
+       登录页  一个bug   README
+</pre>
+</div>
+
+<p>每个字母是一个 commit，箭头指向它的父亲。C 知道它父亲是 B，B 知道它父亲是 A。所以你从 D 可以一路回溯到 A——整个项目的历史。</p>
+
+<p>这种结构在数学上叫 <strong>DAG</strong>（有向无环图，Directed Acyclic Graph）。你不需要记住这个名字，只需要理解：<strong>Git 的历史是一条只能往前、不能回头修改的链</strong>。一旦拍了照，那张照片就永远在那里。</p>
+
+<p>这也是 Git <strong>安全</strong>的根源：</p>
+
+<ul>
+  <li>每个 commit 用 SHA-1 哈希作为 ID（像 <code>a3f2b91</code> 这种字符串），内容一旦改变，ID 就变了。</li>
+  <li>因为每个 commit 里存着父 commit 的 ID，改了历史中的任何一环，整条链的 ID 都会变。</li>
+  <li>Git 能立刻检测到任何篡改或损坏。</li>
+</ul>
+
+<h2>branch：给 commit 起个小名</h2>
+
+<p>每次输 commit 的哈希 ID（<code>a3f2b91...</code>）很烦。所以 Git 发明了 <strong>branch</strong>（分支）——就是一个指向某个 commit 的<strong>移动标签</strong>。</p>
+
+<div class="diagram">
+<pre>
+A  ←──  B  ←──  C  ←──  D
+                      ↑
+                    main
+                 (branch 指针)
+</pre>
+</div>
+
+<p><code>main</code> 不是一个什么特殊的东西——它就是一个标签，指向 commit D。当你做新的 commit 时，<code>main</code> 自动向前移动到最新的 commit。</p>
+
+<p>你可以创建新 branch（比如 <code>experiment</code>），它最初指向同一个 commit。然后你在新 branch 上继续拍照，两条线就分叉了——这就是"分支"的名字来源。但那是下一课的内容。</p>
+
+<h2>总结：四个核心概念</h2>
+
+<table>
+<tr><th>概念</th><th>一句话解释</th></tr>
+<tr><td>commit</td><td>一张完整快照 + 作者 + 时间 + 说明 + 指向父亲的链接</td></tr>
+<tr><td>三个区域</td><td>工作目录（改文件）→ 暂存区（挑要拍的）→ 仓库（拍进历史）</td></tr>
+<tr><td>commit 链</td><td>每个 commit 指向它的父亲，形成不能篡改的单向历史</td></tr>
+<tr><td>branch</td><td>一个指向某个 commit 的移动标签，方便引用</td></tr>
+</table>
+
+<h2>和你目标的关系</h2>
+
+<p>你的目标是<strong>通过 AI agent 安全备份代码</strong>。现在你应该能看出 Git 为什么是这个场景的最佳工具：</p>
+
+<ul>
+  <li><strong>完整快照</strong>意味着你随时可以回到任何一个历史状态——删错了文件？git 里有。</li>
+  <li><strong>不可篡改的链</strong>意味着你的历史是安全的——坏了任何一块 Git 都会发现。</li>
+  <li><strong>branch + remote</strong>（下节课讲）意味着你可以同步到另一台机器或 GitHub——物理上分离的备份。</li>
+</ul>
+
+<h2>检查理解 ✏️</h2>
+
+<p>试试回答这三个问题（答案在工作目录的 <code>reference/glossary.md</code> 里可以找到——但先凭记忆试试）：</p>
+
+<ol>
+  <li>Git 存的是文件的<strong>差异</strong>还是<strong>完整快照</strong>？为什么这个设计很重要？</li>
+  <li>一个 commit 包含哪五个部分？</li>
+  <li>暂存区（staging area）的作用是什么？</li>
+</ol>
+
+<div class="nav">
+  <a href="./0001-what-is-git.html">← Lesson 1（当前）</a>
+  <a href="../reference/glossary.html">📖 术语表</a>
+  <span style="float:right">下一课：Lesson 2 →</span>
+</div>
+
+<div class="footer">
+  <p><strong>推荐阅读：</strong> Scott Chacon & Ben Straub, <em>Pro Git</em> 第 1 章 "Getting Started"。免费在线：<a href="https://git-scm.com/book/en/v2">git-scm.com/book</a>。</p>
+  <p>有问题？直接问你的 AI agent——它能看到这节课的内容和你的学习记录，可以帮你澄清任何概念。</p>
+</div>
+
+</body>
+</html>

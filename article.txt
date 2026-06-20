@@ -1,0 +1,1039 @@
+ZDM - Mathematics Education (2025) 57:777­794
+https://doi.org/10.1007/s11858-025-01684-1
+
+ ORIGINAL PAPER
+
+Systematic Review of Research on Pedagogical Content Knowledge in
+Mathematics: Insights from a Topic-Specific Approach
+
+Monika Grigaliu¯ niene 1,2 · Erno Lehtinen1,3 · Lieven Verschaffel4 · Fien Depaepe4,5
+
+Accepted: 8 April 2025 / Published online: 13 May 2025
+© The Author(s) 2025
+
+Abstract
+One of the most important characteristics of mathematics teachers is their knowledge enabling them to provide learning
+experiences that promote students' understanding, defined as pedagogical content knowledge by Shulman in 1986. In recent
+decades, the number of studies on mathematics teachers' pedagogical content knowledge has steadily increased. The current
+review captures the results of 237 studies published in the last ten years (2013-2022), thematically addressing two compo-
+nents included in all definitions of pedagogical content knowledge - knowledge of instructional strategies and representations
+and knowledge of student learning difficulties. We approach this review from a topic-specific perspective presenting results
+of PCK research on nine mathematical topics, the most research relating to rational numbers, geometry and algebra. Alto-
+gether 83 unique topic-specific learning difficulties were mentioned in PCK measures including procedural and conceptual
+difficulties or combinations of them. Teaching strategies were reported less frequently and some strategies such as the use of
+manipulatives and visualizations were mentioned in relation to many mathematical topics.
+
+Keywords Systematic literature review · Mathematics education · Pedagogical content knowledge · Mathematical
+knowledge for teaching
+
+1 Introduction                                                    cal concepts, provide age-appropriate feedback on students'
+                                                                  thinking and learning (NCTM, 2000).
+To improve mathematics teacher education, it is crucial to
+recognize that school mathematics is unique and distinct             Although scientific knowledge of mathematics is impor-
+from, but connected to, the broader scientific understand-        tant (Hill et al., 2008; Lee, 2007), it is not enough to ensure
+ing of mathematics (Watson, 2008). It is widely agreed that       high-quality mathematics teaching (Blömeke et al., 2022;
+mathematics teachers need to have a deep understanding of         Stigler & Miller, 2018). Mathematics teachers are not al-
+curriculum content. However, they also need to know their         ways aware of the challenges students face in understanding
+students (Hill et al., 2008) and be able to explain mathemati-    the subject and they often lack knowledge on how to ex-
+                                                                  plain difficult mathematical concepts in an insightful way
+                                                                  (Depaepe et al., 2015).
+
+     M. Grigaliu¯niene                                            2 Theoretical Framework
+     monika.grigaliuniene@vdu.lt
+                                                                  2.1 Conceptualisation of Pedagogical Content
+1 Education Academy, Vytautas Magnus University, Kaunas,               Knowledge
+     Lithuania
+                                                                  Shulman (1986) emphasized the importance of teachers'
+2 Faculty of Informatics, Vytautas Magnus University, Kaunas,     specialised knowledge required for teaching content, which
+     Lithuania                                                    he called pedagogical content knowledge (PCK). PCK con-
+                                                                  sists of a synthesis of pedagogical knowledge (general
+3 Department of Teacher Education, University of Turku, Turku,    knowledge of teaching methods) and content knowledge
+     Finland                                                      (Depaepe et al., 2013) that allows teachers to organise
+
+4 Center for Instructional Psychology and Technology, University
+     of Leuven, Leuven, Belgium
+
+5 itec, imec research group at KU Leuven, Kortrijk, Belgium
+778                                                             M. Grigaliu¯ niene et al.
+
+their knowledge from a teaching perspective and use it as          Examining student errors merely in procedural terms is
+a foundation to help students understand specific concepts      too simplistic, because, in many cases, procedural errors
+(Cochran, 1997).                                                may have a deeper conceptual basis (De Corte et al., 1991).
+                                                                Thus, when analysing PCK, researchers such as Depaepe et
+   Over the past three decades, the idea of separating mathe-   al. (2015) and Hill et al. (2008) have understood students'
+matics teachers' general content knowledge (CK) from PCK        errors as being caused by deeper misconceptions, such as a
+has become increasingly popular, and numerous researchers       lack of understanding of the decimal system (Fuson, 1992)
+have related the PCK concept to teachers' competencies ei-      or an inability to recognise the difference between integers,
+ther related to their behaviour (e.g., quality of instruction)  natural and rational numbers (Van Hoof et al., 2017). The
+and/or beliefs and knowledge (Depaepe et al., 2013). How-       term `misconception' is often used to refer to erroneous
+ever, many researchers raise questions about the nature of      mathematical thoughts and beliefs (overview ­ Jamaludin &
+this particular type of knowledge (Mason, 2008; van Driel       Maat, 2020). According to a narrower definition, the term
+& Berry, 2012) or suggest different names and definitions       refers to errors that are hard to correct because they are
+for it (Ball et al., 2008). For instance, Hill et al. (2008)    based on deeply entrenched concepts and beliefs that can
+questioned the distinction between CK and PCK and pro-          only be overcome by means of conceptual change (Vosni-
+posed the more integrated concepts of mathematical knowl-       adou & Verschaffel, 2004).
+edge for teaching (MKT) and content knowledge for teach-
+ing mathematics (CKTM) (Hill et al., 2008). Subsequent             The other aspect of PCK refers to teachers' knowledge
+researchers have analysed the dimensionality of mathemat-       about teaching methods relevant for various mathematical
+ics teachers' knowledge, with mixed results (summary by         topics. PCK measure are not always evidence-based but re-
+Copur-Gencturk & Tolar, 2022).                                  lay also on general theoretical ideas or researchers' own ex-
+                                                                periences (Hill et al., 2008).
+   Researchers have also raised questions concerning the
+appropriate level of granularity for PCK (Chan & Hume,          2.3 Reviews and Large-Scale Studies
+2019), asking whether it mainly relates to general disci-
+plinary principles and practices or whether its value lies in   Depaepe et al. (2013) examined the conceptualisation of
+its topic specificity (van Driel et al., 1998).                 PCK in empirical mathematics education research. The re-
+                                                                view included 60 research articles, and has considered con-
+2.2 Approaches to the Study of Mathematics                      ceptualisations of PCK in the studies, the research methods
+     Teachers' PCK                                              used, and the mathematical subfields studied. Fractions, al-
+                                                                gebra, and functions were the most frequently mentioned
+Most studies on PCK have been based on questionnaires,          mathematical subfields in terms of measuring PCK. Further-
+but some have employed more dynamic measures, such as           more, they distinguished between cognitive and situated ap-
+video-based assessments in view of simulating more realis-      proaches to assess PCK. However, although the study was
+tic classroom situations (Stigler & Miller, 2018). Few ques-    informative regarding the aspects examined, it did not pro-
+tionnaire studies have described in detail how the items used   vide detailed insights into the specific learning difficulties
+to analyse PCK were constructed. In a large-scale study,        about these mathematical subtopics and/or the strategies for
+Hill et al. (2008) explained their development of question-     teaching these mathematical subtopics to students reported
+naire items to measure teachers' content knowledge and stu-     in the reviewed articles.
+dents' (KCS), which is one of the components of MKT.
+They mainly considered empirical studies on the develop-           In another review study, S¸ ims¸ek and Boz (2016) anal-
+ment and learning of mathematics, but drew also on their        ysed 56 studies published between 2004 and 2015 on Turk-
+own experiences as mathematics teachers.                        ish mathematics teachers' PCK. They reported that algebra
+                                                                was the topic most frequently studied by mathematics re-
+   In line with the methodological approach followed by         searchers, followed by geometry and calculus (referred as
+Hill et al. (2008), empirical research has provided a basis     `fundamental mathematics').
+for creating test items to analyse teachers' knowledge of stu-
+dents' mathematical thinking and learning. Several studies         Although these reviews concerning mathematics teach-
+have focused on specific mathematical topics that learners      ers' PCK have summarised important general aspects of the
+at different levels of education find challenging, such as al-  relevant theories, methods, and content areas, they have not
+gebra (Wang, 2015) and rational numbers (Lortie-Forgues         provided detailed information on the specific mathematical
+et al., 2015). Many studies have uncovered typical errors       topics addressed in the PCK studies and the related learn-
+made by students regarding certain mathematical concepts        ing difficulties and teaching strategies--information that is
+and procedures. However, errors can be random slips, but        important for supporting preservice and in-service teacher
+from a pedagogical point of view, frequent, systematic er-      education (Kolitsoe Moru & Qhobela, 2013).
+rors, such as regarding `buggy procedures' in written arith-
+metic (Brown & VanLehn, 1980), are more important.                 Smaller-scale, more specific reviews and meta-analyses
+                                                                have also been conducted, such as reviews comparing the
+Systematic Review of Research on Pedagogical Content Knowledge in Mathematics: Insights from a. . .  779
+
+effectiveness of mathematics teaching methods in general           3 Data Collection
+(with PCK elements) (Pellegrini et al., 2021) and in different
+areas of mathematics, including fractions (Misquitta, 2011),       3.1 Databases and Search Terms
+geometry (Uwurukundo et al., 2020) and algebra (Haas,
+2005).                                                             Following the PRISMA guidelines (Moher et al., 2010), we
+                                                                   collected the studies for this research from the EBSCO and
+   One of the large-scale studies focusing on PCK is the           Web of Science (WoS) databases available in Lithuania (Ap-
+TEDS-M [Teacher Education and Development Study in                 pendix 1).
+Mathematics] (Tatto et al., 2008). The focus of this inter-
+national study was to understand and improve mathematics              The search terms were `pedagogical content knowledge
+teacher education. Findings showed that PCK is a critical          OR PCK OR mathematics knowledge for teaching OR MKT
+component of teacher effectiveness and quality of teaching         OR didactics knowledge OR pedagogical content knowing
+and that it is related to student achievement and classroom        OR PCKG OR CKTM OR content knowledge for teaching
+performance. In the TEDS-M study (e.g., Blömeke et al.,            mathematics AND (mathematics or math) NOT (STEAM
+2012; Kaiser & Blömeke, 2013), which included pre-service          OR STEM) (abbr. `science, technology, engineering, (art)
+teachers in their final year of teacher education across differ-   and mathematics') OR physics OR biology OR chemistry
+ent countries, different competence levels were observed for       OR TPACK OR TPCK (both are abbr. for `technological
+CK as well as for PCK.                                             pedagogical content knowledge') OR PTICK (abbr. `peda-
+                                                                   gogical technology integration content knowledge').
+   Another example of large-scale studies is the COAC-
+TIV [Cognitively Activating Instruction], which build a the-          We only considered articles published in peer-reviewed
+oretical framework of teachers' professional competences           journals, written in English, and published between 2013
+on Shulman's approach (Baumert & Kunter, 2013). The                and 2023 (between 1 January 2013 and 31 December 2022
+key finding of this project was that CK is a necessary but         for EBSCO; January 2013 and December 2022 for WoS).
+not sufficient basis for teachers' PCK and that PCK has
+a stronger influence on fostering instructional quality and        3.2 Search Results
+student learning outcomes compared to CK (Kunter et al.,
+2013).
+
+2.4 The Current Study                                              The EBSCO search returned 988 articles, and the WoS
+                                                                   search yielded 1,073 articles. We obtained a total of 2,061
+Given the value of a topic-specific approach nature PCK            hits at the first screening. Before the first screening, we re-
+(van Driel et al., 1998) the current review, different from        moved records duplicated in EBSCO and WoS (n = 266)
+other reviews in the field, explicitly takes a topic-specific ap-  and two other records that did not qualify as research arti-
+proach. For each mathematical topic, content-specific learn-       cles. We screened the articles to determine their suitability
+ing difficulties and instructional strategies that are analysed    for the study, and the reasons for rejection are presented in
+and/or mentioned throughout the studies of mathematics             Table 1.
+teachers' PCK are described. This approach sheds a light on
+the extent to which various mathematics topics are applied            Reason R5 was only applicable for full text screening,
+in PCK measures and as such provides a deeper understand-          meaning that the article was otherwise suitable, but the de-
+ing on what is meant by PCK in mathematics education.              tails did not meet the purpose of the current study. The re-
+                                                                   quired details were:
+   Because the role of PCK in mathematics teaching and
+learning has expanded greatly after the review of Depaepe          · Reporting of students' mathematical errors or misconcep-
+et al. (2013), an updated review study is needed. As noted            tions based on a test or questionnaire, a measure of teach-
+by Depaepe et al. (2013), all studies on mathematics teach-           ers' PCK (or any other related concept), or teachers' re-
+ers' PCK have focused on two components originally men-               sponses during interviews. Teachers' mathematical errors
+tioned by Shulman (1987): (1) knowledge of students' learn-           or misconceptions were not considered appropriate for the
+ing difficulties and (2) knowledge of instructional strategies        current study because they were related to teachers' CK
+and representations. Therefore, in this review, we consid-            rather than their PCK about student errors or misconcep-
+ered both components. In this review study, we looked at              tions.
+student errors at procedural and conceptual levels. Teaching
+strategies were analysed in relation to the mathematical top-      · Reporting of teaching strategies aimed at preventing or
+ics referred in the studies.                                          correcting students' mathematical errors or misconcep-
+                                                                      tions, commonly identified through interviews with teach-
+   Our research question: which common learning diffi-                ers, lesson observations, and sometimes tests or question-
+culties and which accompanying instructional strategies               naires for measuring teachers' PCK.
+have researchers addressed, investigated, and/or identified
+in studies on mathematics teachers' PCK?
+780                                                                                                              M. Grigaliu¯ niene et al.
+
+Table 1 Rejection reasons                                                                                R5: no details mentioned in
+                                                                                                         the article
+R1_D: domain-related       R2_C: concept-related     R3_TG: target group  R4_T: type of study
+reasons                    reasons                   reasons              reasons
+
+STEM/STEAM (R1_D1):        TPACK/TPCK (R2_C1):       Teacher-educators or pupils Reviews, meta-analyses
+financial/business         beliefs, perceptions, or
+(R1_D2): music, language,  engagement (R2_C2).       (R3_TG1); special    (R4_T1); textbook or
+or literacy (R1_D3).
+                                                     education (R3_TG2).  course material analyses
+
+                                                                          (R4_T2).
+
+Fig. 1 PRISMA chart
+
+3.3 Screening Process                                        2 retracted studies were rejected for further screening (an
+                                                             article could be rejected for more than one reason).
+The screening process was conducted using a PRISMA
+flowchart (Moher et al., 2010), as shown in Fig. 1.             The full-text screening (2nd stage) included 765 articles,
+                                                             30 of which could not be retrieved within the available time-
+   During the initial title and abstract screening, two re-  line. Thus, the second screening comprised of 735 articles.
+searchers double-screened 10% of the articles for suitabil-  After the 2nd stage, 498 articles were rejected, resulting in
+ity, and the interrater reliability score was .76 (Cohen's   237 articles. The reasons for rejection were R1_D (27 hits;
+kappa). Disagreements were discussed until a consensus was   R1_D1, 11; R1_D2, 3; R1_D3, 13), R2_C (117 hits; R2_C1,
+reached.                                                     40; R2_C2, 77), R3_TG (58 hits; R3_TG1, 55; R3_TG2, 3),
+                                                             R4_T (105 hits; R4_T1, 73; R4_T2, 32), and R5_DT (187
+   The title and abstract screening (1st stage) resulted in  hits; duplicates, 10; full text not in English, 2). As at the 1st
+764 studies being rejected for further screening. Reasons    screening stage, there could be more than one reason for re-
+for rejection were R1_D (168 hits; R1_D1, 110; R1_D2,        jection. Of all articles, 10% were double-screened, and the
+11; R1_D3, 47), R2_C (145 hits; R2_C1, 74; R2_C2, 71),       two scorers agreed perfectly about which studies should be
+R3_TG (334; R3_TG1, 306; R2_TG2, 28), and R4_T (131          included in the research.
+hits; R4_T1, 59; R4_T2, 72). In addition, 18 duplicates and
+Systematic Review of Research on Pedagogical Content Knowledge in Mathematics: Insights from a. . .  781
+
+Fig. 2 Number of studies
+published each year
+
+   The references of the articles included in the review are        · Procedural/conceptual [Pro/Con] when the description
+given in supplementary information material.                           was essentially both procedural and conceptual;
+
+3.4 Analysis                                                        · Conceptual [Con] if the main description of the topic was
+                                                                       conceptual and possible procedural elements were not ex-
+The review of the selected articles was conducted in two               plicitly mentioned.
+
+stages. First, a within-case analysis (Miles & Huberman,               The coding was made by the first and second author so
+                                                                    that both independently coded a subset of 30% of items.
+1994) was conducted for the selected 237 articles. In this          Cohen's Kappa was .64, which is considered as substantial
+                                                                    agreement (McHugh, 2012).
+phase, the areas of interest (AOIs) in each article (e.g. para-
+                                                                    4 Results
+graphs describing teaching strategies, pictures presenting er-
+                                                                    4.1 Descriptives
+rors, questionnaire items) were first marked and assigned to
+                                                                    From the 237 studies, 118 covered preservice teachers, 107
+one of the nine mathematical topics. Specific aspects were          in-service teachers, and 12 both preservice and in-service
+                                                                    teachers. Regarding school level, 83 studies covered pri-
+then extracted from the AOIs. If an article contained an ex-        mary, 131 lower secondary, and 62 upper-secondary school.
+                                                                    Some studies covered several school levels.
+ample item from a PCK questionnaire and this item con-
+                                                                       The number of studies published in each year reflects a
+tained student errors or faulty reasoning (e.g. pupils' an-         trend of increasing interest in mathematics teachers' PCK in
+                                                                    educational research (Fig. 2).
+swers  regarding  many    numbers  between  3  and  6  ),  a  mis-
+                                            8       8                  The region of each study was determined by the country
+                                                                    in which the participating teachers were working or study-
+conception was identified from the presented item and then          ing. Some studies included more than one country, in which
+                                                                    case, all were treated as contributors to the total. The num-
+assigned to a specific topic. At the end of this phase, detailed    ber of studies conducted in each continent was as follows:
+                                                                    Africa 24, Australia 18, Europe 58, North America 57, and
+information about students' learning difficulties and related       South America 16. For two studies, the participating coun-
+                                                                    tries could not be identified from the study reports and were
+teaching strategies was extracted from all the articles.            categorised as unspecified. Following the trends reported by
+                                                                    Depaepe et al. (2013), USA was still the leading country for
+Based on the results of the within-case analysis, a cross-          studies (n = 51); Turkey was the second with 40 articles
+                                                                    published between 2013 and 2022 (Fig. 3)
+case analysis was conducted in which the unit of analysis
+
+was changed from articles to mathematical topics. Aspects
+
+of learning difficulties and teaching strategies were grouped
+
+within each topic. In some cases, clear subtopics emerged
+
+(e.g. decimals under the rational number topic). The cross-
+
+case analysis allowed us to identify commonalities among
+
+findings. 30% of the articles were checked by the second
+
+researcher and there were no major disagreements.
+
+Based on the basic classification of learning difficulties,
+
+we conducted a second coding of articles into three cate-
+
+gories characterizing the way how the learning difficulties
+
+are presented:
+
+· Procedural [Pro] if the description of the topic was pre-
+  dominately procedural without explicit references to un-
+  derlying conceptions;
+782                                                             M. Grigaliu¯ niene et al.
+
+Fig. 3 Publications of
+mathematics teachers' PCK
+around the world
+
+   In terms of the research instruments used in the studies,       Some studies such as Norton (2019, #155, Pro/Con) anal-
+questionnaires (also referred as `tests') were by far the most  ysed preservice teachers' abilities to notice procedural errors
+popular research instrument (n = 133), followed by inter-       in written subtraction algorithms and the conceptual prob-
+views (incl. stimulated recall, n = 83), classroom observa-     lems causing them.
+tions (incl. video/audio analysis, n = 72), document analy-
+ses (n = 30), and focus group interviews (n = 15). A combi-        Purely conceptual difficulties were mentioned in PCK
+nation of two or more research instruments was used in over     measures mainly in relation to the number concept. Most of
+half of the studies (n = 170).                                  them referred to misconceptions in learning negative num-
+                                                                bers (e.g., Kaur, 2017, #106, Con). These findings are in
+4.2 Specific Mathematical Topics and Teaching                   line with studies on student learning, which show that un-
+     Strategies Mentioned in PCK Studies                        derstanding negative numbers requires conceptual change in
+                                                                terms of restructuring natural number based prior concep-
+The findings are organized into nine mathematics topics         tions (e.g. Vlassis, 2004).
+(whole numbers, rational numbers, geometry, algebra, func-
+tions, calculus, statistics and probability, problem solving       Most of the instructional strategies (Table 3) men-
+and measurement) typical for school mathematics (Mullis         tioned in the PCK studies related to the use of manip-
+et al., 2016).                                                  ulatives or other external representations when teaching
+                                                                arithmetic operations and word problems, such as "bears
+4.2.1 Basic Arithmetic and Whole Numbers                        and shells" (Fisher, 2018, #66). Conceptually deeper in-
+                                                                structional strategies related to overcoming the limited way
+The topics of whole numbers and basic arithmetic were           to teach multiplication only as repeated addition. Sev-
+mentioned in 55 articles. The studies included the follow-      eral strategies such as number line, area calculation, or
+ing subtopics: arithmetic operations with natural numbers,      Cartesian product methods were mentioned (Barnby, 2013,
+challenges related to word problems and number properties       #20).
+(Table 2).
+                                                                4.2.2 Rational Numbers
+   Most PCK measures on the topic involved procedural
+challenges in applying the algorithms for the four basic        The most frequently occurring topic was teachers' PCK
+arithmetic operations. In some studies, these were presented    of rational numbers that was addressed in 74 articles (Ta-
+without any reference to conceptual problems. In typical        ble 4). This is consistent with the findings of research on
+tasks, teachers were asked what the procedural error is (e.g.,  the teaching and learning of mathematics. Large-scale stud-
+502 - 6 = 406) when applying the subtraction algorithm          ies have confirmed the importance of learning fractions for
+(Charalambous, 2016, #43, Pro). Ozdemir et al. (2017, #162,     later mathematical success (e.g. Siegler et al., 2012).
+Pro) presented a series of place value mistakes and asked
+prospective teachers to help student to apply the correct pro-     As can be seen in Table 4, many studies focused on stu-
+cedure.                                                         dents' conceptual understanding or both procedural and con-
+                                                                ceptual aspects. The most frequently cited conceptual chal-
+                                                                lenge was related to the conceptual complexity of rational
+Systematic Review of Research on Pedagogical Content Knowledge in Mathematics: Insights from a. . .                            783
+                                                                                                                     N of studies
+Table 2 Learning difficulties related to whole number arithmetic
+
+Learning difficulty                                                            Type
+
+Arithmetic operations                                                          Pro (162, 189)                        2
+
+Place value errors - erroneous grouping of numbers when adding or subtracting  Pro/Con (14, 156, 183, 190)           4
+
+Erroneous borrowing directly from hundreds to ones if there were zero tens     Pro (43, 81)                          2
+
+Errors in applying the subtraction algorithm, such as erroneously subtracting  Pro/Con (156)                         1
+the smaller number from the larger number
+Including place value errors - incorrect multiplication                        Pro (158)                             1
+Errors related to long division (incl. remainder)
+                                                                               Pro/Con (14)                          1
+The `loss of zero' problem in long division algorithm
+                                                                               Pro (48, 81, 91, 123, 155, 158, 168)  7
+Inability to recognize divisibility rules
+Errors related to the application of divisibility rules                        Pro (94, 123, 158)                    3
+Word problems
+Superficial problem-solving caused by focusing on key words that implied a     Con (46, 162)                         2
+particular operation
+Formulating mathematical problem from word problem                             Pro (50)                              1
+Number properties
+Problems in recognising and/or explaining prime                                Pro/Con (75)                          1
+Problems in recognising and/or explaining odd and even numbers
+Question of whether zero is an even number                                     Pro (5, 23)                           2
+Challenges in understanding negative numbers, particularly double negation
+                                                                               Pro/Con (43, 189, 226)                3
+
+                                                                               Con (23, 68, 189)                     3
+
+                                                                               Pro (69, 85, 147)                     3
+
+                                                                               Con (25, 36, 136, 147, 158)           5
+
+                                                                               Con (77, 106, 123)                    3
+
+                                                                               Con (152, 161, 186)                   3
+
+                                                                               Con (80, 161, 189)                    3
+
+                                                                               Con (86, 106, 111, 112, 117, 119, 125, 162) 8
+
+Table 3 Teaching strategies   Teaching strategies                                                           Studies
+mentioned in the PCK studies                                                                                66, 85, 133, 183, 127, 133, 156
+                              Basic arithmetic                                                              19, 20, 47, 51, 68, 176
+                                                                                                            25, 147, 156, 176
+                              Use of manipulatives
+                              Using different multiplication representations and strategies                 125, 161
+
+                              Word problem solving
+
+                              The requirement for visual representations as an instructional
+                              strategy for word problem-solving
+
+                              Number properties
+
+                              Anecdotal instructional justifications for double negation rule
+                              (e.g. `the enemy of my enemy is my friend')
+
+numbers. Many of the PCK studies mentioned the challenge          erator, quotient and measure, which is challenging for learn-
+of understanding the relationship between representations         ers. Barnby (2013, #20, Con) emphasized that if only the
+of rational numbers, e.g. fraction's relation to decimals and     part-whole representation with pizza models is used in class,
+percents (e.g., Güler, 2019, #75, Con). Others mentioned the      students rely too much on this model and struggle to under-
+complexity of the fraction concept as part-whole, ratio, op-      stand, e.g., fractions on a number line.
+784                                                                                                                      M. Grigaliu¯ niene et al.
+Table 4 Learning difficulties related to rational numbers
+Learning difficulty                                                        Type                                          N of studies
+
+Errors related to relationship between fraction, decimal number and        Pro (58, 97, 113, 151)                        4
+percent                                                                    Con (5, 75, 80, 86, 87, 92, 100, 110, 113,    19
+                                                                           122, 146, 158, 173, 186, 189, 195, 205,
+Errors related to relationships between fractional interpretations         206, 219)                                     17
+(measure, quotient, operator and ratio)                                    Con (20, 59, 61, 69, 78, 87, 96, 100, 106,
+Mistakes concerning the `whole' in fractions                               137, 154, 159, 162, 188, 196, 225, 233)       4
+                                                                           Pro/Con (122, 151, 161, 195)                  12
+Errors related to concept of proper fractions                              Con (13, 20, 58, 61, 68, 86, 88, 100, 116,
+Natural number bias - incorrect approaches to the addition or subtraction  173, 216, 219)                                2
+of fractions                                                               Con (72, 125)                                 8
+                                                                           Pro/Con (75, 100, 126, 158, 162, 164, 175,
+Place value errors - multiplying decimal numbers                           188)                                          4
+Natural number bias - (mis)understanding the decimal number size and       Con (43, 58, 181, 183)                        7
+calculation                                                                Pro/Con (71, 122, 123, 155, 175, 182, 206)    4
+Errors related to density of rational numbers                              Con (92, 97, 116, 123)
+                                                                                                                         10
+Incorrect approach of multiplication of fractions                          Con (20, 23, 43, 87, 97, 118, 158, 181, 216,
+Inability to represent multiplication and division operations              219)                                          5
+                                                                           Pro (81, 92, 158, 181, 188)                   5
+                                                                           Pro/Con (116, 122, 125, 175, 195)             11
+                                                                           Pro/Con (12, 49, 49, 58, 89, 101, 113, 122,
+                                                                           159, 175, 211)
+
+   Students' difficulties to understand the whole in arith-                number line-based training of rational numbers is strongly
+metic operations with fractions were reported in many stud-                emphasised in recent research on learning and teaching ra-
+ies. E.g., Ozdemir et al. (2017, #161, Pro/Con) presented                  tional numbers (e.g. McMullen et al., 2023).
+preservice and in-service teachers with a student's solutions
+such as 11/15 + 20/25 = 31/40 and asked them how they                      4.2.3 Geometry
+would resolve this situation for the student. They concluded
+that none of the teachers gave an explanation for the stu-                 Sixty-nine studies focused on geometry, including several
+dent's deeper failure to understand the whole and the differ-              subtopics related to learning difficulties about various geo-
+ent parts of it, but only suggested the correct algorithm for              metric concepts (Table 6). Most of the conceptual challenges
+the students to learn.                                                     were related to limited understanding of geometric concepts
+                                                                           such as difficulties in identifying and classifying geomet-
+   Similar examples of student solutions that incorrectly add              ric objects. According to findings from studies on students'
+numerators and denominators when adding fractions have                     difficulties in learning geometry, errors in classifying geo-
+been presented in many other studies (e.g., Lannin, 2013,                  metric figures may be due to a lack of relevant knowledge
+#126, Pro/Con). Many of the examples of students' errors                   (e.g. Özerem, 2012) or, in a few cases, deeper misconcep-
+in arithmetic operations, magnitude, or density of rational                tions (Kabaca et al., 2011). In most PCK studies no spe-
+numbers presented in the studies in this review are related to             cific misconceptions on these topics were mentioned, but
+misconceptions described as natural number bias in recent                  rather a lack of prior conceptions. E.g., Alkhateeb (2018,
+research on mathematics learning (Van Hoof et al., 2017).                  #8, Pro/Con) states that congruence of triangles is a difficult
+However, the term was not used in most of these PCK stud-                  topic for students that requires a lot of support for successful
+ies.                                                                       learning.
+
+   Most of the teaching strategies related to rational num-                   However, there were also some examples of deeper mis-
+bers mentioned in the review articles dealt with the use of                conceptions where prior knowledge and beliefs are system-
+external representations and manipulatives in teaching frac-               atically misleading and make it difficult to learn correct ge-
+tions and decimals, and a few studies suggested the use of                 ometric knowledge without restructuring prior understand-
+everyday situations where rational numbers are needed (Ta-                 ing.
+ble 5). Number line representations were almost never men-
+tioned in the teaching strategies of the PCK studies, although
+Systematic Review of Research on Pedagogical Content Knowledge in Mathematics: Insights from a. . .                      785
+
+Table 5 Teaching strategies  Teaching strategies                                         Studies
+related to rational numbers
+
+                             Presenting fraction multiplication as repeated addition     12, 71, 188
+                             Presenting fraction division as repeated subtraction        71
+                             Using visual strategies (drawing, showing picture)          14, 20, 23, 58, 61, 72, 80, 87, 88, 100, 113, 116,
+                                                                                         122, 161, 175, 183, 188, 196, 205, 211, 233
+                             Using manipulatives (e.g. cut-outs of cake, pizza,          14, 23, 86, 58
+                             chocolate, wooden blocks, beads)
+                             Including IT                                                55, 216
+                             Contextualised instruction for percentages (e.g., tipping,  23, 57, 106, 172
+                             taxes, discounts)
+
+Table 6 Learning difficulties related to geometry learning                    Type                                       N of studies
+Learning difficulty
+                                                                              Pro/Con (8, 189)                           2
+Errors related to congruence and similarity                                   Con (104, 120, 149, 214)                   4
+Errors related to concept of angle                                            Pro/Con (13)                               1
+Errors related to concept of symmetry                                         Con (9, 45, 98)                            3
+Errors related to concept of trigonometric ratios                             Pro/Con (60, 80, 126, 189)                 4
+                                                                              Con (69, 152)                              2
+Faulty identification or classification of two-dimensional geometric          Pro/Con (138, 203)                         2
+figures (exc. triangles, quadrilaterals)                                      Con (134)                                  1
+                                                                              Pro (11, 126)                              2
+Faulty identification or classification of quadrilaterals                     Pro/Con (60, 179)                          2
+                                                                              Con (130)                                  1
+Faulty identification or classification of triangles                          Pro (25, 80)                               2
+Faulty identification or classification of angles                             Pro/Con (37, 60, 225)                      3
+Faulty identification or classification of three-dimensional geometric        Con (1, 2, 120, 217, 229, 230, 232)        7
+figures or their parts                                                        Pro/Con (70, 178, 225)                     3
+Errors related to the height of the parallelogram outside the figure          Con (8, 40, 104, 120, 149, 214, 229, 230)  8
+                                                                              Pro/Con (13)                               1
+Errors related to the calculation (or evaluation) of the size of the area of  Con (64)                                   1
+a plane                                                                       Pro/Con (178, 189, 196)                    3
+Errors related to the calculation (or evaluation) of the size of the area of  Con (11, 23, 114, 130, 132, 170, 194)      7
+a circle                                                                      Pro (111, 112, 117)                        3
+                                                                              Pro/Con (14)                               1
+Faulty evaluation of consistency of a volume                                  Pro (111, 112, 117, 142, 153)              5
+                                                                              Pro/Con (70, 108, 142)                     3
+                                                                              Con (60, 121, 149, 174, 232)               5
+                                                                              Pro/Con (142)                              1
+                                                                              Con (106, 194)                             2
+                                                                              Pro (102)                                  1
+                                                                              Pro/Con (14, 60, 178, 189, 196)            5
+                                                                              Con (194)                                  1
+
+   Some of the PCK studies indicated the possibility that                     of a parallelogram because the height line was not "inside"
+prior teaching may lead to common errors. Kleickmann                          the figure without referring to conceptual knowledge. Baki
+(2013, 2015, #111, #112, Pro) and Krauss (2020, #117, Pro)                    (2017, #14, Pro/Con) presented the same procedural mistake
+present in their PCK measure inability to calculate the area                  but referred to lacking conceptual knowledge. According to
+786                             Teaching strategies                                                        M. Grigaliu¯ niene et al.
+
+Table 7 Teaching strategies in  Use of visualisations to teach the Pythagorean theorem   Studies
+geometry                        Visualizing transformations to teach quadrilaterals
+                                Incorporating manipulatives into teaching processes for  8, 40, 134, 201
+                                two-dimensional figures                                  1, 2, 232
+                                Incorporating manipulatives into teaching processes for  11, 14, 23, 62, 130, 152, 154
+                                three-dimensional figures
+                                Drawing activities for two-dimensional figures           23, 62, 64, 106, 114, 130, 156, 174,
+                                Drawing activities for three-dimensional figures         194, 196
+                                Drawing activities for pattern teaching                  13, 62, 98, 104
+                                Use of interactive software                              40, 130, 114
+                                                                                         60, 152, 189
+                                                                                         8, 70, 104, 130, 149, 233
+
+Fukaya (2022, #69, Con), unclear summaries when teaching         4.2.5 Functions
+about axes of symmetry can lead to the misconception that
+there is only one axis of symmetry.                              Functions were mentioned in 31 studies. Two subtopics
+                                                                 emerged: the concept of a function (incl. slope) and the func-
+   Only a few of the geometric topics addressed in the PCK       tion graphical representation (Table 9).
+studies were related to procedural errors. The area and vol-
+ume calculations presented in the studies involve challenges        The concept of function is found to be very important for
+that are mostly of a procedural nature.                          developing deeper understanding of mathematics (Chang et
+                                                                 al., 2016), but there are many misconceptions related to the
+   Most of the teaching strategies proposed in the PCK stud-     interpretation of functions (review by Leinhardt et al., 1990).
+ies involved the use of visualisations and manipulatives as
+well as the students' own drawing of geometric objects. An-         In line with the findings of research on students' learn-
+other teaching strategy was the use of interactive software,     ing challenges, PCK studies include assumption of false lin-
+especially Geogebra (e.g., Alkhateeb, 2018, #10) (Table 7).      earity. For example, Hatisaru (2020, #83, Con) and Marban
+                                                                 (2020, #140, Con) described pupils' thinking of a function
+4.2.4 Algebra                                                    only as a straight line (only linear). Campbell (2014, #37,
+                                                                 Pro/Con) uses questions about function graphs and the fram-
+The findings on the topic of algebra are based on 64 studies     ing of the possible answers suggest possibility that the mis-
+(Table 8) with algebraic expressions, equations and number       take in identifying the correct answer could be more pro-
+properties as subtopics. Some of the difficulties were pre-      cedural, while understanding how function acts in different
+sented only as procedural mistakes with algebraic expres-        circumstances is conceptual. Applying knowledge of func-
+sions without explicit references to conceptual background       tions can also be procedural as in reading the function graph
+(e.g. Spangerber, 2020, #199, Pro).                              and finding intersection points to realize what solution there
+                                                                 is to equation plotted as a function (Karagöz-Akar, 2016,
+   However, most of the learning challenges mentioned in         #104, Pro).
+the PCK studies were related to misconceptions, which ap-
+peared as procedural but were also connected to concep-             In contrast to the topic of algebra, teaching strategies for
+tual understanding. The most frequent example of this type       functions were much better documented in the PCK studies
+of learning difficulty concerned an inadequate understand-       (Table 10).
+ing of equivalence in solving procedures (e.g. Daniel, 2021,
+#52, Pro/Con) and building up a conceptual interpretation of        To introduce concept of functions, Tas¸dan (2017, #208),
+tasks where operations and variables appeared on both sides      Sintema (2020, #193) and other researchers present teaching
+of the equal sign (Murtafiah, 2019, #153, Con). Misconcep-       through an example of a machine that has input and output.
+tions of equality is a topic that has been extensively explored
+in research on conceptual change in mathematics (e.g., Byrd         To develop deeper understanding, researchers propose
+et al., 2015).                                                   posing thought-provoking questions such as "What is a
+                                                                 function?" as a start for a discussion (Busch, 2015, #34) to
+   Only very few studies mentioned teaching strategies re-       develop pupils' understanding.
+lated to algebra education and most of them proposed some
+kind of modelling (#47, 54, 67, 76, 106, 129, 157, 185, 220,        Borke (2021, #27) presents mathematical modelling ac-
+224, 233). E.g., Demonty (2018, #54) presents two problems       tivities, for example, examination of gas price tendencies
+where modelling, if done correctly, would lead to better un-     or magazine sells. The use of interactive drawing programs
+derstanding of the pattern presented and builds on algebraic     (e.g., Geogebra) was extensively covered in the reviewed
+generalisation.                                                  studies (e.g., Emre-Akdogan, 2018, #62).
+Systematic Review of Research on Pedagogical Content Knowledge in Mathematics: Insights from a. . .                                      787
+
+Table 8 Learning difficulties related to algebra                                                                               N of studies
+
+Learning difficulty                                                                 Type                                       1
+                                                                                                                               4
+Algebraic expressions                                                               Pro (199)                                  2
+Errors related to algebraic expressions in simplification or grouping tasks         Con (64, 84, 102, 201)                     1
+Treating unequal terms as if they were equal                                        Pro/Con (168, 234)                         2
+                                                                                    Con (67)                                   1
+Errors related to concept of variables                                              Pro (33, 234)                              2
+                                                                                    Pro/Con (52)
+Equations                                                                           Con (143, 168)                             4
+Difficulties in solving atypical equations (e.g. variables on both sides, variable                                             3
+on the `wrong' side, etc                                                            Pro (74, 84, 108, 141)                     3
+                                                                                    Pro/Con (80, 157, 220)                     5
+Mistakes in solving quadratic equations                                             Con (67, 153, 201)                         1
+Mistakes in applying formulae                                                       Pro/Con (93, 157, 161, 164, 207)           3
+                                                                                    Con (67)                                   1
+Errors related to `sign changes' and/or `cancellations'                             Pro/Con (93, 157, 164)                     1
+                                                                                    Con (17)                                   3
+Inability to interpret equation solutions geometrically                             Pro (141)                                  2
+Number properties                                                                   Pro/Con (84, 102, 201)                     1
+                                                                                    Con (67, 153)                              3
+Lack of understanding of the commutative property or distributive property          Pro (207)
+Lack of understanding of the zero-product property                                  Con (67, 157, 233)                         1
+Errors related to equality sign and modelling equality                                                                         3
+Wrongly changing the direction of the inequality sign                               Pro (141)                                  2
+Errors related to the concept of quadratic inequality                               Pro/Con (52, 80, 108)                      2
+Difficulties in solving pattern problems                                            Con (67, 143)                              1
+Errors related to proportional reasoning                                            Pro/Con (93, 124)                          3
+                                                                                    Pro (141)                                  1
+Errors related to rationality and/or roots                                          Pro/Con (52, 84, 182)                      2
+Errors related to the power of zero                                                 Con (143)                                  2
+Errors related to absolute values                                                   Pro (74, 76)                               5
+General                                                                             Pro/Con (17, 218)                          1
+Confusion between the terms `equation' and `expression'                             Con (54, 196, 223, 224, 231)               10
+The difficulty of formulating either an algebraic expression or an equation from    Pro (37)
+a word problem (or creating a problem, or modelling a problem)                      Con (33, 74, 75, 106, 108, 126, 168, 196,  2
+                                                                                    197, 222)                                  3
+                                                                                    Pro/Con (5, 124)                           2
+                                                                                    Con (75, 131, 157)                         1
+                                                                                    Con (75, 161)
+                                                                                    Con (41)                                   1
+                                                                                                                               5
+                                                                                    Pro (125)                                  15
+                                                                                    Pro/Con (80, 99, 125, 185, 207)
+                                                                                    Con (54, 67, 84, 106, 121, 129, 132, 182,
+                                                                                    189, 197, 217, 220, 223, 224, 226)
+788                                                              Type                                        M. Grigaliu¯ niene et al.
+Table 9 Learning difficulties related to functions                                                                   No of studies
+Learning difficulty
+Concept of the functions                                         Con (3, 27, 28, 208)                        4
+Inability to determine dependent and independent variables
+Inability to determine range, and domain                         Pro/Con (37, 210)                           2
+
+Difficulties in applying the univalence property                 Con (27, 83, 104, 105, 148, 166, 193, 209,  9
+Faulty linking of a function to its various forms
+                                                                 217)
+Inability to create a model from a problem
+Graphical representations                                        Pro/Con (123)                               1
+Not being able to read or interpret graphs
+Difficulties in plotting                                         Con (27, 83, 166, 178, 208, 209, 215, 237)  8
+The inability to determine the range and domain of data
+Falsely assuming linearity                                       Pro (31, 74, 83)                            3
+
+                                                                 Con (3, 7, 27, 34, 90, 103, 105, 128, 208,  12
+
+                                                                 209, 213, 237)
+
+                                                                 Con (28, 74, 90, 165)                       4
+
+                                                                 Pro (17, 31, 148)                           3
+
+                                                                 Con (3, 27, 28, 90, 140)                    5
+
+                                                                 Pro (17, 104, 105, 107, 148, 215)           6
+
+                                                                 Pro (148)                                   1
+
+                                                                 Con (3, 83, 166)                            3
+
+                                                                 Con (3, 27, 83, 140 193)                    5
+
+Table 10 Teaching strategies in  Teaching strategies                                            Studies
+function topic
+                                 Introducing the concept of a function using a machine          3,7, 193, 208, 209
+                                 Using interactive drawing programmes to support visualisation  62, 104, 166
+                                 Use of real-world problems                                     3,7, 28, 62, 74, 103, 148, 165, 208,
+                                                                                                213, 215
+
+4.2.6 Calculus                                                   proposed the use of mathematics programs, such as Geoge-
+                                                                 bra.
+Only ten PCK studies mentioned calculus, referring to con-
+ceptual difficulties and deeper misconceptions (Table 11).       4.2.7 Statistics and Probability
+Studies on students' learning have revealed profound mis-
+conceptions and conceptual changes in the extension of           The findings of statistics and probability come from 21 stud-
+number concepts when learning calculus (Lehtinen et al.,         ies.
+1997). In the PCK studies the conceptual challenges are re-
+lated to general problems in understanding calculus con-            Misconceptions that are mentioned the most are the ones
+cepts, in particular the infinitesimal concept. For example,     dealing with statistical concepts (Table 12). Studies on stu-
+the researchers present a misconception of the uniqueness of     dents' learning of statistics have shown that it is the abstract
+the derivative function (Pino-Fan, 2018, #171, Con), which       nature of statistics, which causes most of the difficulties in
+means that students are unable to account for the constant.      understanding (Sotos et al., 2007). For example, students are
+This is a well-known misconception in studies of student         unable to interpret problems about averages because of lack
+learning (e.g., Kiat, 2005). All the learning difficulties pre-  of conceptual understanding (Callingham, 2016, #35, Con;
+sented in this topic were conceptual.                            Campbell, 2014, #37, Con; Wasserman, 2017, #86, Con).
+                                                                 Similarly, misinterpretation of what standard deviation is
+   Only two proposals for teaching strategies of calculus        (large means greater variability, small suggests points are
+were mentioned in the PCK studies. To promote pupils' un-        close to mean) (Wasserman, 2017, #221, Con).
+derstanding of infinity and develop infinitesimal approach,
+discussion of infinity paradoxes can be used (Savuran, 2022,        For probabilities, Matitaputty (2022, #144, Con) notes
+#184) like Zeno's paradox. One study (Ünver, 2015, #215)         students' inability to distinguish which combinatorics for-
+                                                                 mula is appropriate for a given situation. Maher (2022,
+Systematic Review of Research on Pedagogical Content Knowledge in Mathematics: Insights from a. . .                                  789
+
+Table 11 Learning difficulties related to calculus                                                                         N of studies
+                                                                                                                           5
+Learning difficulty                                                        Type                                            3
+                                                                                                                           3
+Errors related to concept of limit                                         Con (17, 24, 105, 139, 215)                     2
+Connecting limits with functions wrongly                                   Con (105, 171, 207)
+Understanding the meaning of the infinitesimal                             Con (184, 207, 215)                             N of studies
+Incorrect treatment of infinity as a number                                Con (184, 228)
+                                                                                                                           1
+Table 12 Learning difficulties related to statistics and probabilities           Type                                      1
+Learning difficulty                                                                                                        1
+                                                                                 Pro/Con (132)                             1
+Statistics                                                                       Con (221)                                 1
+Confusion between the centre, spread, and range of distributions                 Con (14)                                  1
+Not being able to explain the meaning of standard deviation                      Pro/Con (204)                             8
+Errors related to calculation and interpretation of arithmetic averages          Pro (47)                                  2
+                                                                                 Pro/Con (132)                             1
+Errors related to the average, variability, and centrality of data               Con (14, 35, 37, 86, 160, 191, 204, 221)  3
+                                                                                 Con (39, 160)
+The misuse of visualisations, the faulty creation of misleading graphs                                                     2
+and charts                                                                       Pro/Con (132)                             2
+Misinterpretation of various graphs (inc. scatter plots, box-and-whiskers        Con (42, 160, 191)
+diagrams)
+                                                                                 Con (139, 144)
+Probabilities
+Understanding permutation principle, independence (of probabilistic              Pro/Con (144, 177)
+events), and probability
+Misusing the formula
+
+#139, Con) presents pupils' inability to understand dis-                   take that is based on a misconception (Besser, 2020, #22,
+tribution. Misusing the formula could be procedural, but                   Pro/Con; Lim, 2013, #132; Pro/Con).
+also could show lack of understanding of the concept
+(Matitaputty, 2022, #144, Pro/Con, Retnawati, 2018, #177,                     Teaching strategies (Table 15) for measurement include
+Pro/Con).                                                                  using manipulatives to learn, e.g., length - rope or ruler (Jo-
+                                                                           har, 2021, #97), weight - scales (Johar, 2021, #97; Jong,
+   For statistics, most of the teaching strategies share the               2021, #99) and using real-world examples e.g., temperature
+same core idea - extensive talking about statistical con-                  (Kang, 2016, #103), speed and area (Polman, 2021, #172),
+cepts (Table 13), e.g., Callingham (2016, #35) introduces                  volume (Polman, 2021, #172, Slavit, 2018, #196).
+use of faulty charts that could be discussed with students.
+For teaching data representations, Harr (2015, #82) invites                4.2.9 Problem Solving, Reasoning, and Proof
+to discuss a variety of data representations for a learning
+unit on patterns in data. For probabilities, mostly discussion-            Twenty-five PCK studies considered problem solving, with
+based strategies included discussing concepts or more spe-                 PCK tests highlighting frequently appearing problems in
+cific aspects of the topics.                                               students' learning (Table 16). All of the learning difficulties
+                                                                           in this topic were presented as conceptual.
+4.2.8 Measurement
+                                                                              Most of the findings on problem solving can be also
+Ten PCK studies were addressing measurement and only                       linked to a specific mathematical topic (e.g. algebra and
+three mentioned learning difficulties (Table 14).                          algebra-related problem-solving issues (Akyüz, 2020, #6),
+                                                                           Con) (Table 16). However, for reasoning and proof, findings
+   A typical misconception is the inability to use measure-                are more concept-related. Buchbinder (2022, #30, Con),
+ment parameters appropriately that can be a procedural mis-                asks what proving the theorem means and how to inverse
+790                                                                                                           M. Grigaliu¯ niene et al.
+
+Table 13 Teaching strategies in  Teaching strategies                                                 Studies
+teaching statistics and
+probabilities                    Statistics
+
+                                 Clarifying the underlying arithmetic mean, distribution,            37, 39, 42, 191, 221, 227, 233
+                                 standard deviation, sample, population, and other concepts
+                                 and clearly explaining the relationships between                    37, 191
+                                 Teacher- or peer-led discussion to help students better             35, 37, 39, 41, 82, 132, 233
+                                 process new information and understand the topic                    37, 39, 82, 160, 233
+                                 Emphasising discussion-based analysis of given data
+                                 representation examples (including incorrect ones)                  82, 187
+                                 Use of various data representations during the                      144, 177, 178, 233
+                                 instructional process
+                                                                                                     236
+                                 Probabilities                                                       187
+
+                                 Explicit discussing the concepts
+                                 Using contrasting cases (e.g. analysing fairness), analysing
+                                 examples
+                                 Conducting simple experiments
+                                 Presenting alternative solutions
+
+Table 14 Misconceptions          Learning difficulty                                                 Type                N of studies
+related to measurement
+                                 Inability to understand the data                                    Pro/Con (22, 132)   2
+                                 Not knowing the relationship between units of measurement           Pro (189)           1
+
+Table 15 Teaching strategies in  Teaching strategies                                                                     Studies
+teaching measurement
+                                 Estimating with everyday objects before introducing standard units                      141, 202
+                                 Using manipulatives or their visual representations                                     97, 99
+                                 Employing real-life examples                                                            103, 172, 196
+
+Table 16 Learning difficulties related to problem solving, reasoning, and proof
+
+Learning difficulty                                                   Type                                               N of studies
+
+Being unable to apply mathematical knowledge to presented situations  Con (5, 23, 29, 57, 65, 67 68, 73, 150, 174, 177,  14
+                                                                      189, 196, 202)
+Difficulties in applying more than one problem-solving strategy       Con (6, 26, 65, 145, 169)                          5
+Making unjustified assumptions and basing a solution on them          Con (22, 30, 45, 53, 169, 174, 177)                7
+Inability to determine the validity of an argument                    Con (16, 45, 177, 217)                             4
+Inability to present a valid argument                                 Con (16, 29, 30, 169, 217)                         5
+
+it - whether it is true and does not need proof or any other          4.2.10 Summary of the Findings
+combination.
+                                                                      The most frequently presented topics in the studies were ra-
+   For the teaching strategies, findings were scarce. Two             tional numbers, geometry, algebra, and whole number arith-
+studies (#65, #44) mentioned group work and one study (#6)            metic. The least popular topics were calculus and measure-
+using diverse problem-solving strategies and possibilities to         ment.
+teach the topic. Buchbinder (2020, #29) mentions type of
+task "Is this a coincidence" that is used to teach how to avoid          The number of different topic-specific learning difficul-
+unjustified assumptions.                                              ties mentioned in studies was 84, most of which were related
+                                                                      to algebra (20), whole numbers (14), geometry (13) and ra-
+Systematic Review of Research on Pedagogical Content Knowledge in Mathematics: Insights from a. . .                       791
+
+Table 17 Summary of the results                                                                                  Number of
+                                                                                                                 articles
+Topic                            Different     Procedural        Procedural/   Conceptual            Teaching    referring to
+                                 learning      difficulties      conceptual    difficulties          strategies  topic1
+                                 difficulties  N (%)             difficulties  N (%)                 N
+                                 N                               N (%)
+
+Whole numbers                    14            21 (36)           10 (17)       27 (47)               4           55
+
+Rational numbers                 10            9 (8)             34 (31)       68 (61)               6           74
+
+Geometry                         13            14 (16)           31 (36)       42 (48)               8           69
+
+Algebra                          20            13 (13)           34 (33)       55 (54)               1           64
+
+Functions                        9             13 (20)           3 (5)         49 (75)               3           31
+
+Calculus                         4             0 (0)             0 (0)         13 (100)              2           10
+
+Statistics and probability       8             1 (8)             5 (42)        6 (50)                8           21
+
+Measurement                      2             2 (67)            1 (33)        0 (0)                 3           10
+
+Problem solving, reasoning,      4             0 (0)             0 (0)         35 (100)              2           25
+
+and proof
+
+Total                            84            74 (15)           116 (24)      295 (61)              37          237
+
+1The number of articles is different than the sum of classified difficulties because one article can include different difficulties or only teaching
+strategies.
+
+tional numbers (10). The total number of teaching strategies     mentioned in the studies were procedural in nature, whereas
+mentioned was 40, but some methods, such as using ma-            in other topics such as geometry, algebra and rational num-
+nipulatives, visualizations and computer applications, were      bers the difficulties were mainly described as conceptual or
+mentioned in relation to several mathematical topics.            conceptual/procedural with explicit references to underlying
+                                                                 misconceptions or lacking conceptual knowledge.
+   The distribution of procedural, procedural/conceptual
+and conceptual learning difficulties in different mathemat-         This review also revealed that teaching strategies tended
+ical topics is presented in Table 17.                            to be presented in more general terms than learning difficul-
+                                                                 ties. The same teaching strategies were mentioned in rela-
+   Most of the learning difficulties were presented as con-      tion to several topics (e.g. the use of manipulatives to en-
+ceptual. The highest number of procedural difficulties was       rich the teaching of whole numbers and geometry), while
+related to arithmetic. In most of the cases where articles pre-  learning difficulties were more specific and in most cases
+sented procedural difficulties, there were some remarks of       could only be linked to one topic, thus they were more
+underlying conceptual difficulties.                              frequently presented in research instruments than teaching
+                                                                 strategies. One reason for this dominance of learning diffi-
+5 Discussion                                                     culties in PCK measures is that these difficulties can be eval-
+                                                                 uated somewhat independently of the cultural and educa-
+This review study examined learning difficulties and teach-      tional context, whereas instructional strategies are typically
+ing strategies mentioned in 237 studies on pre-service and       more closely related to different cultural and pedagogical
+in-service mathematics teachers' PCK. The descriptive data       traditions or lack of experimental research on topic-specific
+showed the increasing popularity of the topic, a tendency        teaching methods. The learning difficulties and teaching
+to use more than one research instrument (the most popular       strategies were found to be only partly based on research
+instrument was a questionnaire), and internationally uneven      evidence from research on students' mathematics learning
+contributions to the topic, with the US and Turkey making        and teaching interventions (see Hill et al., 2008). Instead
+the greatest contributions.                                      of presenting explicit research evidence for the measure-
+                                                                 ments, PCK studies often just copied items from previous
+   The findings on the most frequently mentioned topics are      PCK studies or developed items based on common beliefs
+consistent with the extent to which these topics have been       within the mathematics education community. E.g., many
+studied in academic research on learning difficulties and        PCK measures used similar items which have been used in
+misconceptions in mathematics (e.g. Neidorf et al., 2020).       recent research on natural number bias in rational number
+                                                                 learning without any references to these studies.
+   Most of the learning difficulties were presented as con-
+ceptual. The nature of learning difficulties mentioned in           There are many possible reasons for the vague use of
+PCK measurements varied between different topics. In             research evidence in PCK measures. Whereas certain top-
+whole number arithmetic many of the learning difficulties        ics, such as basic arithmetic, rational numbers and algebra,
+792                                                             M. Grigaliu¯ niene et al.
+
+have been investigated intensively, on others, such as cal-     Appendix 1
+culus or measurements, the research evidence on learners'
+difficulties and teaching strategies for preventing or reme-    List of databases included in the EBSCO search (Lithuania
+dying these difficulties is very limited. Even in the exten-    access)
+sively studied topics there is lack of systematic reviews and
+meta-analyses summarizing research evidence, which could           Education source (n = 611)
+be used in developing evidence-based PCK measures.                 ERIC (n = 571)
+                                                                   Academic Search Ultimate (n = 295)
+   The results of the review may be biased due to the selec-       Teacher Reference Center (n = 97)
+tion criteria, since books, book chapters, non-peer-reviewed       Applied Science & Technology Ulimate (n = 35)
+articles, and dissertations were excluded. Second, only stud-      MasterFILE Premier (n = 24)
+ies published in English were considered. Moreover, when           MEDLINE (n = 13)
+conducting this review, several shortcomings that prevented        Humanities Source Ultimate (n = 10)
+a more detailed analysis have been identified. Although            Business Source Ultimate (n = 8)
+many studies were based on questionnaires, only a small            APA PsycArticles (n = 4)
+number of them included the questionnaires in the articles,        Health Source: Nursing/Academic Edition (n = 3)
+with many presenting only a few examples thus preventing           Library, Information Science & Technology Abstracts
+more in-depth analysis. The same problem holds for the re-         (n = 2)
+viewed studies based on interviews, where short excerpts
+from the interviews limited the analysis.                       Supplementary Information The online version contains supplemen-
+                                                                tary material available at https://doi.org/10.1007/s11858-025-01684-1.
+   To develop the scientific knowledge necessary in en-
+hancing evidence based PCK measures in future, more ba-         Declarations
+sic research on students learning is needed in many top-
+ics of mathematics curricula which are currently under-         Competing Interests The authors declare no competing interests.
+represented in research literature.
+                                                                Open Access This article is licensed under a Creative Commons Attri-
+   Future research on PCK could take a meta-analysis ap-        bution 4.0 International License, which permits use, sharing, adapta-
+proach to identifying the possible effects of the level of      tion, distribution and reproduction in any medium or format, as long as
+teachers' PCK, including its components such as recogniz-       you give appropriate credit to the original author(s) and the source, pro-
+ing learning difficulties on teaching qualities and student     vide a link to the Creative Commons licence, and indicate if changes
+learning. Further systematic reviews could focus on regions     were made. The images or other third party material in this article are
+that were not included in the sample for this review due to     included in the article's Creative Commons licence, unless indicated
+the search criteria excluding studies not published in En-      otherwise in a credit line to the material. If material is not included
+glish.                                                          in the article's Creative Commons licence and your intended use is not
+                                                                permitted by statutory regulation or exceeds the permitted use, you will
+   With the increasing interest in the PCK of mathematics       need to obtain permission directly from the copyright holder. To view a
+teachers, scholarly understanding of the concept has signifi-   copy of this licence, visit http://creativecommons.org/licenses/by/4.0/.
+cantly advanced. However, as the present research indicates,
+there remains much to be explored.                              References
+
+6 Conclusion                                                    Ball, D. L., Thames, M. H., & Phelps, G. (2008). Content knowledge
+                                                                      for teaching: What makes it special? Journal of Teacher Educa-
+The article presents a synthesis of more than 230 PCK stud-           tion, 59, 389­407. https://doi.org/10.1177/0022487108324554.
+ies in mathematics and shows that the studies focus predom-
+inantly on mathematical topics where students have difficul-    Baumert, J., & Kunter, M. (2013). The COACTIV model of teachers'
+ties or misconceptions. More than 80 different mathemati-             professional competence. In M. Kunter, J. Baumert, W. Blum,
+cal topics that are known to be difficult for students are de-        U. Klusmann, S. Krauss, & M. Neubrand (Eds.), Mathematics
+scribed in the PCK measures. Many, but not all, of these              teacher education: Vol. 8. Cognitive activation in the mathemat-
+are based on findings from on students' learning. This rich           ics classroom and professional competence of teachers, Springer.
+database can be used in teacher training and professional             https://doi.org/10.1007/978-1-4614-5149-5_2.
+development, in the preparation of mathematics textbooks,
+and in the planning of new tools to analyse teachers' PCK.      Blömeke, S., Jentsch, A., Ross, N., Kaiser, G., & Konig, J. (2022).
+Much less was reported on topic-specific teaching strategies,         Opening up the black box: Teacher competence, instructional
+which is a weakness of PCK measures.                                  quality, and students' learning progress. Learning and Instruction,
+                                                                      79, 101600. https://doi.org/10.1016/j.learninstruc.2022.101600.
+
+                                                                Blömeke, S., Suhl, U., Kaiser, G., & Döhrmann, M. (2012). Family
+                                                                      background, entry selectivity and opportunity to learn: What mat-
+                                                                      ters in primary teacher education? An international comparison
+                                                                      of fifteen countries. Teaching and Teacher Education, 28, 44­55.
+                                                                      https://doi.org/10.1016/j.tate.2011.08.006.
+Systematic Review of Research on Pedagogical Content Knowledge in Mathematics: Insights from a. . .  793
+
+Brown, J. S., & VanLehn, K. (1980). Repair theory: A generative the-                and misconceptions in sets. African Journal of Research in Math-
+      ory of bugs in procedural skills. Cognitive Science, 4, 379­426.              ematics, Science and Technology Education, 17(3), 220­230.
+                                                                                    https://doi.org/10.1080/10288457.2013.848534.
+Byrd, C. E., McNeil, N. M., Chesney, D. L., & Matthews, P. G. (2015).         Kunter, M., Klusmann, U., Baumert, J., Richter, D., Voss, T., &
+      A specific misconception of the equal sign acts as a barrier to               Hachfeld, A. (2013). Professional competence of teachers: Effects
+      children's learning of early algebra. Learning and Individual Dif-            on instructional quality and student development. Journal of Ed-
+      ferences, 38, 61­67. https://doi.org/10.1016/j.lindif.2015.01.001.            ucational Psychology, 105(30), 805­820. https://doi.org/10.1037/
+                                                                                    a0032583.
+Chan, K. K. H., & Hume, A. (2019). Towards a consensus model:                 Lee, H.-J. (2007). Developing an effective professional development
+      Literature review of how science teachers' pedagogical content                model to enhance teachers' conceptual understanding and ped-
+      knowledge is investigated in empirical studies. In A. Hume, R.                agogical strategies in mathematics. The Journal of Education
+      Cooper, & A. Borowski (Eds.), Repositioning pedagogical con-                  Thought, 41(2), 125­144. https://www.jstor.org/stable/23767318.
+      tent knowledge in teachers' knowledge for teaching science (pp.         Lehtinen, E., Merenluoto, K., & Kasanen, E. (1997). Conceptual
+      3­76). Springer. https://doi.org/10.1007/978-981-13-5898-2_1.                 change in mathematics: From rational to (un)real numbers. Euro-
+                                                                                    pean Journal of Psychology of Education, 12(2), 131­145. https://
+Chang, B. L., Cromley, J. G., & Tran, N. (2016). Coordinating multiple              doi.org/10.1007/BF03173081.
+      representations in a reform calculus textbook. International Jour-      Leinhardt, G., Zaslavsky, O., & Stein, M. K. (1990). Functions,
+      nal of Science and Mathematics Education, 14(8), 1475­1497.                   graphs, and graphing: Tasks, learning, and teaching. Review
+      https://doi.org/10.1007/s10763-015-9652-3.                                    of Educational Research, 60(1), 1­64. https://doi.org/10.3102/
+                                                                                    00346543060001001.
+Cochran, K. F. (1997). Pedagogical content knowledge: Teachers' in-           Lortie-Forgues, H., Tian, J., & Siegler, R. S. (2015). Why is learning
+      tegration of subject matter, pedagogy, students, and learning envi-           fraction and decimal arithmetic so difficult? Developmental Re-
+      ronments. Research Matters ­ to the Science Teacher.                          view, 38, 201­221. https://doi.org/10.1016/j.dr.2015.07.008.
+                                                                              Mason, J. (2008). PCK and beyond. In P. Sullivan & T. Wood (Eds.),
+Copur-Gencturk, Y., & Tolar, T. (2022). Mathematics teaching exper-                 International handbook of mathematics teacher education: Vol. 1.
+      tise: A study of the dimensionality of content knowledge, peda-               Knowledge and beliefs in mathematics teaching and teaching de-
+      gogical content knowledge, and content-specific noticing skills.              velopment. Sense Publishers.
+      Teaching and Teacher Education, 114(5), 103696. https://doi.org/        McHugh, M. L. (2012). Interrater reliability: The kappa statistic. Bio-
+      10.1016/j.tate.2022.103696.                                                   chemia Medica, 22(3), 276­282. https://doi.org/10.11613/BM.
+                                                                                    2012.031.
+De Corte, E., Verschaffel, L., & Schrooten, H. (1991). Computer simu-         McMullen, J., Koskinen, A., Kärki, T., Lindstedt, A., Määttä, S.,
+      lation as a tool in studying teachers' cognitive activities during er-        Halme, H., Lehtinen, E., Hannula-Sormunen, M. M., & Kiili, K.
+      ror diagnosis in arithmetic. In P. Goodyear (Ed.), Teaching knowl-            (2023). A game-based approach to promoting adaptive rational
+      edge and intelligent tutoring (pp. 367­378). Ablex.                           number knowledge. Mathematical Thinking and Learning, 26(4),
+                                                                                    411­427. https://doi.org/10.1080/10986065.2023.2177818.
+Depaepe, F., Torbeyns, J., Vermeersch, N., Janssens, D., Janssen, R.,         Miles, M. B., & Huberman, A. M. (1994). Qualitative data analysis
+      Kelchtermans, G., Verschaffel, L., & Van Dooren, W. (2015).                   (2nd ed.). Sage.
+      Teachers' content and pedagogical content knowledge on ratio-           Misquitta, R. (2011). A review of the literature: Fraction instruc-
+      nal numbers: A comparison of prospective elementary and lower                 tion for struggling learners in mathematics. Learning Disabilities
+      secondary school teachers. Teaching and Teacher Education, 47,                Research & Practice, 26(2), 109­119. https://doi.org/10.1111/j.
+      82­92. https://doi.org/10.1016/j.tate.2014.12.009.                            1540-5826.2011.00330.x.
+                                                                              Moher, D., Liberati, A., Tetzlaff, J., & Altman, D. G. (PRISMA
+Depaepe, F., Verschaffel, L., & Kelchtermans, G. (2013). Pedagogical                Group) (2010). Preferred reporting items for systematic reviews
+      content knowledge: A systematic review of the way in which the                and meta-analyses: The PRISMA statement. International Jour-
+      concept has pervaded mathematics educational research. Teaching               nal of Surgery, 8(5), 336­341. https://doi.org/10.1016/j.ijsu.2010.
+      and Teacher Education, 34, 12­25. https://doi.org/10.1016/j.tate.             02.007.
+      2013.03.001.                                                            Mullis, I. V. S., Martin, M. O., Goh, S., & Cotter, K. (Eds.) (2016).
+                                                                                    TIMSS 2015 encyclopedia: Education policy and curriculum in
+Fuson, K. (1992). Research on whole number addition and subtraction.                mathematics and science. Boston College, TIMSS & PIRLS In-
+      In D. A. Grouws (Ed.), Handbook of research on mathematics                    ternational Study Center.
+      teaching and learning (pp. 243­275). Macmillan Co.                      National Council of Teachers of Mathematics [NCTM] (2000). Princi-
+                                                                                    ples and standards for school mathematics. NTCM.
+Haas, M. (2005). Teaching methods for secondary algebra: A meta-              Neidorf, T., Arora, A., Erberber, E., Tsokodayi, Y., & Mai, T. (2020).
+      analysis of findings. NASSP Bulletin, 89(624), 24­46. https://doi.            Student misconceptions and errors in physics and mathemat-
+      org/10.1177/019263650508964204.                                               ics: Exploring data from TIMSS and TIMSS advanced. Springer.
+                                                                                    https://doi.org/10.1007/978-3-030-30188-0.
+Hill, H. C., Ball, D. L., & Schilling, S. G. (2008). Unpacking pedagog-       Özerem, A. (2012). Misconceptions in geometry and suggested so-
+      ical content knowledge: Conceptualizing and measuring teach-                  lutions for seventh grade students. Procedia ­ Social and Be-
+      ers' topic-specific knowledge of students. Journal for Research               havioral Sciences, 55, 720­729. https://doi.org/10.1016/j.sbspro.
+      in Mathematics Education, 39(4), 372­400.                                     2012.09.557.
+                                                                              Pellegrini, M., Lake, C., Neitzel, A., & Slavin, R. E. (2021). Effec-
+Jamaludin, N. H., & Maat, S. M. (2020). A systematic literature re-                 tive programs in elementary mathematics: A meta-analysis. AERA
+      view on students misconceptions in mathematics. International                 Open, 7. https://doi.org/10.1177/2332858420986211.
+      Journal of Academic Research in Business and Social Sciences,           Shulman, L. S. (1986). Those who understand: Knowledge growth in
+      10(6), 127­145. https://doi.org/10.6007/IJARBSS/v10-i6/7273.                  teaching. Educational Researcher, 15, 4­14.
+
+Kabaca, T., Karadag, Z., & Aktümen, M. (2011). Misconception, cog-
+      nitive conflict, and conceptual changes in geometry: A case study
+      with pre-service teachers. Mevlana International Journal of Edu-
+      cation, 1, 44­55.
+
+Kaiser, G., & Blömeke, S. (2013). Learning from the eastern and
+      the western debate: The case of mathematics teacher education.
+      ZDM - Mathematics Education, 45, 7­19. https://doi.org/10.1007/
+      s11858-013-0490-x.
+
+Kiat, S. E. (2005). Analysis of students' difficulties in solving integra-
+      tion problems. The Mathematics Educator, 9(1), 39­59.
+
+Kolitsoe Moru, E., & Qhobela, M. (2013). Secondary school teachers'
+      pedagogical content knowledge of some common student errors
+794                                                                        M. Grigaliu¯ niene et al.
+
+Shulman, L. S. (1987). Knowledge and teaching: Foundations of the                nal of Educational Studies in Mathematics and Sciences, 16(1).
+      new reform. Harvard Educational Review, 57, 1­22. https://doi.             https://doi.org/10.4314/ajesms.v16I1.1.
+      org/10.17763/haer.57.1.j463w79r56455411.                             van Driel, J. H., & Berry, A. (2012). Teacher professional de-
+                                                                                 velopment focusing on pedagogical content knowledge. Ed-
+Siegler, R. S., Duncan, G. J., Davis-Kean, P. E., Duckworth, K.,                 ucational Researcher, 41(1), 26­28. https://doi.org/10.3102/
+      Claessens, A., Engel, M., Susperreguy, M. I., & Chen, M.                   0013189X11431010.
+      (2012). Early predictors of high school mathematics achievement.     van Driel, J. H., Verloop, N., & de Vos, W. (1998). Developing science
+      Psychological Science, 23(10), 691­697. https://doi.org/10.1177/           teachers' pedagogical content knowledge. Journal of Research in
+      0956797612461752.                                                          Science Teaching, 35(6), 673­695. https://doi.org/10.1002/(SICI)
+                                                                                 1098-2736(199808)35:6<673::AID-TEA5>3.0.CO;2-J.
+S¸ ims¸ek, N., & Boz, N. (2016). Analysis of pedagogical content knowl-    Van Hoof, J., Verschaffel, L., & Van Dooren, W. (2017). Number sense
+      edge studies in the context of mathematics education in Turkey: A          in the transition from natural to rational numbers. British Journal
+      meta-synthesis study. Educational Sciences: Theory and Practice,           of Educational Psychology, 87(1), 43­56. https://doi.org/10.1111/
+      16, 799­826. https://jestp.com/article-detail/?id=561.                     bjep.12134.
+                                                                           Vlassis, J. (2004). Making sense of the minus sign of becoming flexible
+Sotos, A. E. C., Vanhoof, S., Van den Noortgate, W., & Onghena, P.               in `negativity'. Learning and Instruction, 14(5), 469­484. https://
+      (2007). Students' misconceptions of statistical inference: A re-           doi.org/10.1016/j.learninstruc.2004.06.012.
+      view of the empirical evidence from research on statistics educa-    Vosniadou, S., & Verschaffel, L. (2004). Extending the conceptual
+      tion. Educational Research Review, 2(2), 98­113. https://doi.org/          change approach to mathematics learning and teaching [edito-
+      10.1016/j.edurev.2007.04.001.                                              rial]. Learning and Instruction, 14(5), 445­451. https://doi.org/
+                                                                                 10.1016/j.learninstruc.2004.06.014.
+Stigler, J. W., & Miller, K. F. (2018). Expertise and expert performance   Wang, X. (2015). The literature review of algebra learning: Focusing
+      in teaching. In The Cambridge handbook of expertise and expert             on the contributions to students' difficulties. Creative Education,
+      performance (pp. 431­452). Cambridge University Press. https://            6, 144­153. https://doi.org/10.4236/ce.2015.62013.
+      doi.org/10.1017/9781316480748.024.                                   Watson, A. (2008). School mathematics as a special kind of mathemat-
+                                                                                 ics. For the Learning of Mathematics, 28(3), 3­7.
+Tatto, M. T., Schwille, J., Senk, S., Ingvarson, L., Peck, R., &
+      Rowley, G. (2008). Teacher education and development study           Publisher's Note Springer Nature remains neutral with regard to juris-
+      in mathematics (TEDS-M): Policy, practice, and readiness to          dictional claims in published maps and institutional affiliations.
+      teach primary and secondary mathematics. Conceptual frame-
+      work. Teacher Education and Development International Study
+      Center, College of Education, Michigan State University.
+
+Uwurukundo, M. S., Maniraho, J. F., & Tusiime, M. (2020). GeoGebra
+      integration and effectiveness in the teaching and learning of math-
+      ematics in secondary schools: A review of literature. African Jour-
+

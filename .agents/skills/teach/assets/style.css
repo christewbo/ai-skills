@@ -1,0 +1,187 @@
+/* Shared stylesheet for Git teaching workspace */
+/* Tufte-inspired: clean, readable, content-first */
+
+:root {
+  --text: #1a1a1a;
+  --bg: #fffff8;
+  --accent: #c44;
+  --muted: #666;
+  --rule: #ddd;
+  --code-bg: #f5f4f0;
+  --sidenote-bg: #faf9f5;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Palatino", "Palatino Linotype", "Georgia", serif;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  max-width: 720px;
+  margin: 3rem auto;
+  padding: 0 1.5rem;
+}
+
+h1 {
+  font-size: 2.2rem;
+  font-weight: normal;
+  margin-bottom: 0.3rem;
+  line-height: 1.2;
+}
+
+h1 small {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 0.3rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+  font-weight: normal;
+  margin-top: 2.5rem;
+  margin-bottom: 0.8rem;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.3rem;
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: normal;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-style: italic;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+strong {
+  font-weight: 600;
+}
+
+code {
+  font-family: "SF Mono", "Consolas", "Monaco", monospace;
+  font-size: 0.85em;
+  background: var(--code-bg);
+  padding: 0.1em 0.3em;
+  border-radius: 2px;
+}
+
+pre {
+  background: var(--code-bg);
+  padding: 1rem 1.2rem;
+  margin: 1rem 0 1.2rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  border-left: 3px solid var(--accent);
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+blockquote {
+  border-left: 3px solid var(--muted);
+  margin: 1.2rem 0;
+  padding: 0.5rem 1rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+ul, ol {
+  margin: 0.5rem 0 1rem 1.5rem;
+}
+
+li {
+  margin-bottom: 0.3rem;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.2rem 0;
+  font-size: 0.95rem;
+}
+
+th, td {
+  padding: 0.5rem 0.8rem;
+  text-align: left;
+  border-bottom: 1px solid var(--rule);
+}
+
+th {
+  font-weight: 600;
+  background: var(--code-bg);
+}
+
+.note {
+  background: var(--sidenote-bg);
+  border-left: 3px solid var(--accent);
+  padding: 0.8rem 1rem;
+  margin: 1.2rem 0;
+  font-size: 0.92rem;
+  border-radius: 0 4px 4px 0;
+}
+
+.note-title {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  font-style: normal;
+  color: var(--accent);
+}
+
+.diagram {
+  text-align: center;
+  margin: 1.5rem 0;
+  font-family: "SF Mono", "Consolas", "Monaco", monospace;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.diagram pre {
+  display: inline-block;
+  text-align: left;
+  border-left: none;
+}
+
+.nav {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.nav a {
+  margin-right: 1.5rem;
+}
+
+.footer {
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  border-top: 1px solid var(--rule);
+  padding-top: 1rem;
+}

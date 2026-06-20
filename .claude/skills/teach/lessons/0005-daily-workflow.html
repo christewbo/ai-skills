@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 5 · 日常工作流</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<h1>日常工作流<small>Lesson 5 · 改代码 → 备份的节奏</small></h1>
+
+<p>前四课建立了概念并做了一次热身。这节课练两个日常操作——你以后 90% 的 Git 使用就这两件事。</p>
+
+<h2>节奏 1：改代码 → 备份（每次写代码都做）</h2>
+
+<pre><code># 写代码...
+git add .
+git commit -m "做了什么"
+git push</code></pre>
+
+<p>三行，10 秒。commit message 写清楚——三个月后你会感谢自己。</p>
+
+<h2>节奏 2：用 branch 安全开发（做新功能时用）</h2>
+
+<pre><code># 1. 从 master 开出安全区
+git switch -c new-feature
+
+# 2. 在安全区里随意开发，随时 commit
+git add .
+git commit -m "新功能：第一步"
+# ... 继续写 ...
+git add .
+git commit -m "新功能：完成"
+
+# 3. 成了 → 合回 master
+git switch master
+git merge new-feature
+git push
+git branch -d new-feature
+
+# 3 备选：烂了 → 丢弃（安全区的魔法）
+git switch master
+git branch -D new-feature</code></pre>
+
+<h2>检查理解 ✏️</h2>
+
+<ol>
+  <li>你在 <code>new-feature</code> 上做了 3 个 commit，master 上做了 1 个。执行 <code>git merge new-feature</code> 之后，master 的 commit 历史变成几个？</li>
+  <li>为什么 <code>git switch -c</code> 比 <code>git branch</code> 更常用？</li>
+</ol>
+
+<div class="nav">
+  <a href="./0004-first-backup.html">← Lesson 4</a>
+  <a href="./0005-daily-workflow.html">Lesson 5（当前）</a>
+  <a href="../reference/glossary.html">📖 术语表</a>
+</div>
+
+<div class="footer">
+  <p><strong>推荐阅读：</strong> <em>Pro Git</em> 第 3.2 节 "Basic Branching and Merging"。<a href="https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging">git-scm.com/book</a>。</p>
+  <p>有问题？直接问你的 AI agent。</p>
+</div>
+
+</body>
+</html>

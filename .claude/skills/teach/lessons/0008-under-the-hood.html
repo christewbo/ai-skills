@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 8 · Agent 的决策循环：它怎么"思考"的？</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .loop-diagram { margin: 2rem 0; text-align: center; }
+  .loop-diagram svg { max-width: 100%; }
+
+  .trace { background: #1a1a1a; color: #e0e0e0; font-family: "SF Mono","Consolas","Monaco",monospace; font-size: 0.8rem; padding: 1rem 1.2rem; border-radius: 6px; margin: 1rem 0; overflow-x: auto; line-height: 1.6; }
+  .trace .time { color: #888; }
+  .trace .tool { color: #fc0; }
+  .trace .think { color: #6cf; }
+  .trace .result { color: #6f6; }
+
+  .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0; }
+  .comparison > div { background: var(--code-bg); padding: 1rem; border-radius: 4px; }
+  .comparison h4 { margin-top: 0; font-style: normal; font-weight: 600; }
+
+  .quiz { margin: 2rem 0; }
+  .quiz .q { background: var(--code-bg); padding: 1.2rem 1.5rem; margin: 1.5rem 0; border-radius: 6px; }
+  .quiz .q p { margin-bottom: 0.8rem; font-weight: 600; }
+  .quiz .opts { display: flex; flex-direction: column; gap: 0.5rem; }
+  .quiz .opt { padding: 0.6rem 1rem; border: 1px solid var(--rule); border-radius: 4px; cursor: pointer; background: var(--bg); transition: background 0.15s; }
+  .quiz .opt:hover { background: #f0ece0; }
+  .quiz .opt.selected { border-color: var(--accent); background: #fdf0f0; }
+  .quiz .opt.correct { border-color: #2a7d2a; background: #e8f5e8; }
+  .quiz .opt.wrong { border-color: var(--accent); background: #fde8e8; }
+  .quiz .feedback { margin-top: 0.8rem; font-size: 0.9rem; display: none; }
+  .quiz .feedback.show { display: block; }
+  .quiz .feedback.good { color: #2a7d2a; }
+  .quiz .feedback.bad { color: var(--accent); }
+  .quiz button { margin-top: 1rem; padding: 0.5rem 1.2rem; font-size: 0.95rem; border: 1px solid var(--accent); background: var(--bg); color: var(--accent); border-radius: 4px; cursor: pointer; }
+  .quiz button:hover { background: var(--accent); color: #fff; }
+
+  .step { margin: 1.8rem 0; padding-left: 1rem; border-left: 3px solid var(--rule); }
+  .step .num { font-weight: 700; color: var(--accent); font-size: 1.1rem; }
+  .step h3 { margin-top: 0; font-style: normal; }
+
+  .checklist { list-style: none; margin-left: 0; }
+  .checklist li { padding: 0.3rem 0; }
+  .checklist li::before { content: "☐ "; color: var(--muted); }
+  .checklist li.done::before { content: "☑ "; color: #2a7d2a; }
+</style>
+</head>
+<body>
+
+<h1>Lesson 8 · Agent 的决策循环：它怎么"思考"的？</h1>
+<p><small>上一篇：<a href="./0007-first-hook.html">Lesson 7 — 配置你的第一个 Hook</a></small></p>
+
+<p>上节课你配置了 PostToolUse hook，能看到 agent 调用了哪些工具。但<strong>为什么</strong>它选择调用 A 而不是 B？<strong>什么时候</strong>它决定"做完了"？<strong>中间几轮</strong>发生了什么？</p>
+
+<p>这节课拆开 agent 的"大脑"——<strong>决策循环（Decision Loop）</strong>。</p>
+
+<h2>1. Agent 不是"一次性回答"的</h2>
+
+<p>聊天机器人收到一句话 → 输出一句话。Agent 不一样。Agent 收到一个目标后的典型行为是：</p>
+
+<div class="diagram">
+<pre>
+用户："帮我找出 src/ 里所有未使用的函数"
+
+Agent（内部循环）：
+  第 1 轮 → 想："我需要先知道 src/ 下有哪些文件"          → 调 Glob
+  第 2 轮 → 想："现在我需要搜索函数定义"                   → 调 Grep
+  第 3 轮 → 想："找到了 47 个函数，需要检查谁调用了它们"    → 调 Grep（多次）
+  第 4 轮 → 想："交叉比对后，3 个函数确实没人调用"          → 输出结果
+</pre>
+</div>
+
+<p>一个任务可能涉及 <strong>N 轮</strong>的"观察 → 思考 → 行动"循环。每一轮 agent 都在决定：<strong>接下来做什么？</strong></p>
+
+<h2>2. 决策循环的三个阶段</h2>
+
+<p>每一轮决策都经过三个阶段：</p>
+
+<table>
+<tr><th>阶段</th><th>agent 在做什么</th><th>你能看到什么</th></tr>
+<tr>
+  <td><strong>① 观察（Observe）</strong></td>
+  <td>接收新信息——上一步工具的输出、用户的消息、系统提示</td>
+  <td>无（内部过程）</td>
+</tr>
+<tr>
+  <td><strong>② 思考（Think）</strong></td>
+  <td>根据当前所有信息，推理下一步的最佳行动。要不要调工具？调哪个？还是该回复用户了？</td>
+  <td>无（内部过程）</td>
+</tr>
+<tr>
+  <td><strong>③ 行动（Act）</strong></td>
+  <td>输出决定——要么调用一个工具（进入下一轮循环），要么给用户回复（循环结束）</td>
+  <td><strong>PostToolUse hook 能抓到</strong></td>
+</tr>
+</table>
+
+<div class="note">
+  <div class="note-title">🔑 关键洞察</div>
+  <p>你上节课配置的 PostToolUse hook 只捕获了<strong>阶段③的一小部分</strong>（工具调用的结果面）。agent 的"思考过程"是你看不到的——除非你要求它说出来。</p>
+</div>
+
+<h2>3. 用你已有的 hook 观察决策循环</h2>
+
+<p>你现在有一个现成的观察工具——上节课配置的 <code>PostToolUse</code> hook。来看一个真实案例：</p>
+
+<p><strong>实验：对你当前的 AI 老师说一句话，让它做一个需要多步操作的任务。比如：</strong></p>
+
+<div class="step">
+  <h3><span class="num">Step 1</span> · 发起一个多步任务</h3>
+  <p>回到 Claude Code 对话，输入：</p>
+  <pre><code>帮我检查 .agents/skills/teach/ 目录下有哪些 .html 文件，统计它们的行数，告诉我哪个文件最长。</code></pre>
+</div>
+
+<div class="step">
+  <h3><span class="num">Step 2</span> · 查看 hook 日志</h3>
+  <p>等 agent 完成后，在你的终端运行：</p>
+  <pre><code>cat ~/claude-tool-log.txt | tail -10</code></pre>
+</div>
+
+<div class="step">
+  <h3><span class="num">Step 3</span> · 数一数</h3>
+  <p>日志中出现了几个工具调用？它们是什么顺序？</p>
+</div>
+
+<p>你应该能看到类似这样的"行动轨迹"：</p>
+
+<div class="trace">
+<span class="time">[2026-06-22 15:01:02]</span> Called: <span class="tool">Glob</span><br>
+<span class="time">[2026-06-22 15:01:03]</span> Called: <span class="tool">Read</span><br>
+<span class="time">[2026-06-22 15:01:04]</span> Called: <span class="tool">Read</span><br>
+<span class="time">[2026-06-22 15:01:05]</span> Called: <span class="tool">Read</span><br>
+</div>
+
+<p>这就是 agent 决策循环的"脚印"。Glob（列出文件）→ Read（读第一个）→ Read（读第二个）→ Read（读第三个）→ 回复。每一步都是"观察 → 思考 → 行动"的一次循环。</p>
+
+<h2>4. 什么决定了 agent 的决策？</h2>
+
+<p>Agent 的每一步决策由四样东西共同塑造：</p>
+
+<table>
+<tr><th>输入</th><th>作用</th><th>谁设置的</th></tr>
+<tr>
+  <td><strong>System Prompt（系统提示）</strong></td>
+  <td>定义 agent 的身份、能力边界、行为规范、可用工具列表。相当于"入职手册"。</td>
+  <td>Claude Code 框架自动注入</td>
+</tr>
+<tr>
+  <td><strong>Skill 指令</strong></td>
+  <td>叠加在 system prompt 之上，告诉 agent"面对这类任务时遵循这套流程"。</td>
+  <td>你（通过 SKILL.md 文件）</td>
+</tr>
+<tr>
+  <td><strong>对话历史</strong></td>
+  <td>用户说了什么、之前做了哪些工具调用、得到了什么结果——全部塞在上下文窗口里。</td>
+  <td>每次对话自动累积</td>
+</tr>
+<tr>
+  <td><strong>工具输出</strong></td>
+  <td>上一步调用的工具返回了什么信息——agent 据此决定下一步。</td>
+  <td>工具自动返回</td>
+</tr>
+</table>
+
+<div class="note">
+  <div class="note-title">💡 这就是为什么 hook 存在</div>
+  <p>Hook 让你在"工具调用"这个节点上<strong>插入自己的逻辑</strong>——你要么在调用之前拦截（PreToolUse），要么在调用之后观察/校验（PostToolUse）。本质上，你在修改决策循环的信息流。</p>
+</div>
+
+<h2>5. 什么时候循环停止？</h2>
+
+<p>Agent 的循环不会永远跑下去。它会停止当：</p>
+
+<ul>
+  <li><strong>任务完成</strong>——agent 判断已经收集了足够信息，给用户回复</li>
+  <li><strong>上下文窗口快满</strong>——信息太多，agent 必须在忘记之前总结</li>
+  <li><strong>达到工具调用上限</strong>——Claude Code 限制单次任务最多调用一定次数工具</li>
+  <li><strong>遇到无法恢复的错误</strong>——工具反复失败，agent 放弃并报告</li>
+</ul>
+
+<h2>6. 对比：聊天机器人 vs Agent</h2>
+
+<div class="comparison">
+  <div>
+    <h4>聊天机器人</h4>
+    <p>用户输入 → 模型思考 → 文本输出</p>
+    <p><strong>1 轮，无工具，无行动</strong></p>
+    <p>类比：笔友——收到信，回信。</p>
+  </div>
+  <div>
+    <h4>Agent</h4>
+    <p>用户输入 → 思考 → 调工具 → 收结果 → 思考 → 调工具 → … → 文本输出</p>
+    <p><strong>N 轮，多工具，有行动</strong></p>
+    <p>类比：侦探——勘查现场、采集指纹、比对记录、写报告。</p>
+  </div>
+</div>
+
+<h2>7. 真实示例：你的 review skill</h2>
+
+<p>你项目中有一个现成的例子：<code>.agents/skills/review/SKILL.md</code>。这个 skill 告诉 agent 怎么做代码审查。看看它的流程：</p>
+
+<ol>
+  <li><strong>确认基线</strong>——用 <code>git rev-parse</code> 和 <code>git diff</code> 获取变更范围</li>
+  <li><strong>找到 spec</strong>——搜索 commit message 引用的 issue / 本地 spec 文件</li>
+  <li><strong>并行派发子 agent</strong>——同时启动 Standards 和 Spec 两个子 agent</li>
+  <li><strong>聚合结果</strong>——收齐两个报告，合并输出</li>
+</ol>
+
+<p>这就是一个 <strong>多步决策循环</strong>的真实应用：每一步的输出决定下一步做什么，而且中间还分叉出<strong>并行子循环</strong>。</p>
+
+<h2>测验：你理解 agent 的决策逻辑了吗？</h2>
+
+<div class="quiz" id="quiz">
+  <div class="q" id="q1">
+    <p>Q1. agent 在收到用户请求后，决定"先 Glob 列出文件，再 Grep 搜索内容"——这个决定发生在决策循环的哪个阶段？</p>
+    <div class="opts">
+      <div class="opt" data-v="a">A. 观察（Observe）</div>
+      <div class="opt" data-v="b">B. 思考（Think）</div>
+      <div class="opt" data-v="c">C. 行动（Act）</div>
+    </div>
+    <div class="feedback" id="f1"></div>
+  </div>
+
+  <div class="q" id="q2">
+    <p>Q2. 你的 PostToolUse hook 捕获的是决策循环的哪个阶段？</p>
+    <div class="opts">
+      <div class="opt" data-v="a">A. 思考（Think）</div>
+      <div class="opt" data-v="b">B. 观察（Observe）</div>
+      <div class="opt" data-v="c">C. 行动（Act）——工具调用之后</div>
+    </div>
+    <div class="feedback" id="f2"></div>
+  </div>
+
+  <div class="q" id="q3">
+    <p>Q3. 以下哪一项<strong>不是</strong> agent 做出决策时的信息来源？</p>
+    <div class="opts">
+      <div class="opt" data-v="a">A. System Prompt（系统提示）</div>
+      <div class="opt" data-v="b">B. 上一步工具的输出结果</div>
+      <div class="opt" data-v="c">C. 硬盘上的所有文件内容</div>
+    </div>
+    <div class="feedback" id="f3"></div>
+  </div>
+</div>
+
+<h2>你的动手练习</h2>
+
+<p>这节课只有一个核心任务——<strong>用你已有的 hook 去观察 agent 的决策循环</strong>：</p>
+
+<ol>
+  <li><strong>发起一个多步任务</strong>——对 agent 提一个必须用 2 个以上工具才能完成的请求</li>
+  <li><strong>读 hook 日志</strong>——用 <code>cat ~/claude-tool-log.txt | tail -10</code> 看 agent 走了几步</li>
+  <li><strong>反向推理</strong>——看着日志中的工具调用顺序，试着还原 agent 每轮的"思考"：为什么它选择了这个顺序？</li>
+  <li><strong>打开 review skill</strong>——读 <code>.agents/skills/review/SKILL.md</code> 的前 40 行，找找里面描述的多步决策流程</li>
+</ol>
+
+<h2>完成检查清单</h2>
+
+<ul class="checklist" id="checklist">
+  <li>发起了一个多步任务，并查看了 hook 日志</li>
+  <li>能说出日志中出现的每个工具调用是什么目的</li>
+  <li>能用自己的话解释 agent 决策循环的"观察→思考→行动"三个阶段</li>
+  <li>读了 review skill 的前 40 行，理解了它是一个多步决策流程</li>
+</ul>
+
+<h2>推荐阅读</h2>
+
+<p><a href="https://www.anthropic.com/research/building-effective-agents" target="_blank">📄 "Building Effective Agents" — Anthropic Research</a></p>
+
+<p>这篇博客的 <strong>"Agentic systems"</strong> 部分详细讨论了 agent 何时需要多步推理、何时只需要单步——和这节课讲的决策循环直接相关。</p>
+
+<div class="footer">
+  <p>看到 hook 日志里的工具调用序列了？数出几轮循环？<strong>把日志贴给 AI 老师看</strong>，老师帮你解读每一步的决策逻辑。</p>
+  <p>没看到日志？说明你的 PostToolUse hook 可能没配好——回到 <a href="./0007-first-hook.html">Lesson 7</a> 检查一下。</p>
+  <p style="margin-top:0.5rem;">
+    <a href="../reference/ai-glossary.html">📖 AI 术语表</a> ·
+    <a href="./0007-first-hook.html">← Lesson 7（第一个 Hook）</a> ·
+    <a href="./0009-tools-and-mcp.html">→ Lesson 9（Tool 与 MCP）</a>
+  </p>
+</div>
+
+<script>
+(function() {
+  const answers = { q1: 'b', q2: 'c', q3: 'c' };
+  const explanations = {
+    q1: { good: '✅ 正确！选择工具、决定策略——都发生在 Think 阶段。Observe 是收集信息，Act 是执行决定。', bad: '❌ 答案是 Think。"决定做什么"是思考（Think）阶段的核心工作。Observe 只负责接收信息，Act 只负责执行。' },
+    q2: { good: '✅ 正确！PostToolUse = 工具调用<strong>之后</strong>，所以它捕获的是 Act 阶段的"事后"快照。', bad: '❌ 答案是 C。Post = 之后，它在工具完成行动（Act）之后触发。Think 和 Observe 都是内部过程，hook 看不到。' },
+    q3: { good: '✅ 正确！Agent 不会自动知道硬盘上所有文件——它只有主动读（Read）或搜（Grep）了某个文件后，才能看到其内容。', bad: '❌ 答案是 C。Agent 不是操作系统——它不能"感知"全部文件。它只有通过工具调用才能获取信息。这是 agent 最关键的限制之一。' }
+  };
+
+  document.querySelectorAll('.q').forEach(q => {
+    const qid = q.id;
+    const correct = answers[qid];
+    const fb = document.getElementById('f' + qid.slice(1));
+
+    q.querySelectorAll('.opt').forEach(opt => {
+      opt.addEventListener('click', () => {
+        if (q.dataset.answered === 'true') return;
+        q.dataset.answered = 'true';
+
+        const v = opt.dataset.v;
+        q.querySelectorAll('.opt').forEach(o => {
+          if (o.dataset.v === correct) o.classList.add('correct');
+          if (o.dataset.v === v && v !== correct) o.classList.add('wrong');
+        });
+
+        fb.textContent = v === correct ? explanations[qid].good : explanations[qid].bad;
+        fb.className = 'feedback show ' + (v === correct ? 'good' : 'bad');
+      });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

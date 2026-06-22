@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agent 术语表</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<h1>AI Agent 术语表</h1>
+
+<p>每个术语保留英文原名 + 一句话中文解释。设计目标：看到一个新术语时，30 秒内能理解它在整个 agent 系统中的位置。</p>
+
+<h2>核心概念</h2>
+
+<table>
+<tr><th>术语</th><th>定义</th></tr>
+<tr>
+  <td><strong>Agent（智能体）</strong></td>
+  <td>一个能自主执行任务的 AI 程序。它接收指令，自己决定用什么工具、按什么顺序做事，最后产出结果。类比：一个能自己干活的下属——你告诉他目标，他决定怎么做。</td>
+</tr>
+<tr>
+  <td><strong>Hook（钩子/生命周期钩子）</strong></td>
+  <td>在特定事件发生时自动触发的脚本或指令。比如"会话开始前"、"工具调用后"、"agent 停止时"。类比：手机的"勿扰模式"定时开关——到了某个节点自动执行。</td>
+</tr>
+<tr>
+  <td><strong>Skill（技能）</strong></td>
+  <td>一个打包好的指令集，告诉 agent"面对某类任务时应该怎么做"。包含名称、描述、触发条件、具体步骤。类比：员工的 SOP 手册——遇到情况 X，执行流程 Y。</td>
+</tr>
+<tr>
+  <td><strong>Tool（工具）</strong></td>
+  <td>agent 可以调用的具体能力——读文件、搜索代码、执行命令、调用 API。每个工具有明确的输入/输出格式。类比：工匠手中的锤子、锯子、尺子。</td>
+</tr>
+<tr>
+  <td><strong>System Prompt（系统提示）</strong></td>
+  <td>在 agent 启动时注入的"基础设定"，定义了 agent 的身份、能力边界、行为规范、可用工具。类比：新员工的入职手册。</td>
+</tr>
+<tr>
+  <td><strong>Context Window（上下文窗口）</strong></td>
+  <td>agent 一次能"记住"的信息总量上限——包括对话历史、工具结果、系统提示。超出窗口的旧信息会被压缩或丢弃。类比：人脑的工作记忆容量。</td>
+</tr>
+</table>
+
+<h2>进阶概念</h2>
+
+<table>
+<tr><th>术语</th><th>定义</th></tr>
+<tr>
+  <td><strong>MCP（Model Context Protocol）</strong></td>
+  <td>一个开放协议，定义 agent 如何连接外部工具和数据源。让不同团队的 agent 和工具可以互操作。类比：USB 标准——任何 USB 设备都能插进任何电脑。</td>
+</tr>
+<tr>
+  <td><strong>Workflow（工作流）</strong></td>
+  <td>多个 agent 按预定逻辑协作完成一个复杂任务的编排脚本。包含分支、循环、并行。类比：工厂流水线的设计图纸。</td>
+</tr>
+<tr>
+  <td><strong>Subagent（子智能体）</strong></td>
+  <td>被主 agent 派出去执行特定子任务的独立 agent。有自己的上下文窗口和工具集，完成后返回结果。类比：项目经理把调研任务分给一个组员。</td>
+</tr>
+<tr>
+  <td><strong>Multi-agent System（多智能体系统）</strong></td>
+  <td>多个 agent 协作完成单个 agent 无法独立完成的任务。agent 之间可能并行、串行、或互相验证。类比：一个团队协作做项目。</td>
+</tr>
+<tr>
+  <td><strong>Structured Output（结构化输出）</strong></td>
+  <td>让 agent 按预定义的 JSON schema 格式返回结果，而非自由文本。保证下游程序能可靠解析。类比：填表格 vs 写散文。</td>
+</tr>
+<tr>
+  <td><strong>Tool Call（工具调用）</strong></td>
+  <td>agent 在运行过程中向外部发起的操作请求——读文件、搜代码、执行命令。每个工具调用都有请求和响应。类比：经理叫下属"帮我把那个文件拿来"。</td>
+</tr>
+</table>
+
+<div class="nav">
+  <a href="../lessons/0006-what-are-agents.html">← Lesson 6: 三个核心概念</a>
+  <a href="./ai-glossary.html">📖 术语表（当前）</a>
+  <a href="./glossary.html">📖 Git 术语表</a>
+</div>
+
+<div class="footer">
+  <p>觉得某些解释不够清楚？直接向 AI 老师说"术语表里 X 的解释我不太理解"——老师会展开讲解。</p>
+</div>
+
+</body>
+</html>

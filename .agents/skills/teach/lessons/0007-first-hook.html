@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 7 · 配置你的第一个 Hook</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .step { margin: 1.8rem 0; padding-left: 1rem; border-left: 3px solid var(--rule); }
+  .step .num { font-weight: 700; color: var(--accent); font-size: 1.1rem; }
+  .step h3 { margin-top: 0; font-style: normal; }
+
+  .checklist { list-style: none; margin-left: 0; }
+  .checklist li { padding: 0.3rem 0; }
+  .checklist li::before { content: "☐ "; color: var(--muted); }
+  .checklist li.done::before { content: "☑ "; color: #2a7d2a; }
+
+  .terminal { background: #1a1a1a; color: #e0e0e0; font-family: "SF Mono","Consolas","Monaco",monospace; font-size: 0.85rem; padding: 1rem 1.2rem; border-radius: 6px; margin: 1rem 0; overflow-x: auto; line-height: 1.5; }
+  .terminal .prompt { color: #6f6; }
+  .terminal .cmd { color: #fff; }
+  .terminal .out { color: #aaa; }
+</style>
+</head>
+<body>
+
+<h1>Lesson 7 · 配置你的第一个 Hook</h1>
+<p><small>上一篇：<a href="./0006-what-are-agents.html">Lesson 6 — Agent、Hook、Skill 三块积木</a></small></p>
+
+<p>上节课你发现了：本地 <code>settings.local.json</code> 里没有 hook 配置。这节课你将从零配置一个真正可用的 hook——<strong>每次 agent 调用工具时自动记录日志</strong>。做完你就能亲眼看到 agent "在做什么"。</p>
+
+<h2>Hook 的配置结构</h2>
+
+<p>Claude Code 的 hook 配置写在 <code>settings.json</code>（或 <code>settings.local.json</code>）的 <code>"hooks"</code> 字段里。结构长这样：</p>
+
+<pre><code>{
+  "hooks": {
+    "事件名": [
+      {
+        "matcher": "匹配规则（正则，可选）",
+        "command": "要执行的命令"
+      }
+    ]
+  }
+}</code></pre>
+
+<p>一个事件可以绑多个 hook（所以用数组），每个 hook 可以加 <code>matcher</code> 只对匹配的工具生效。</p>
+
+<h2>可用的事件类型</h2>
+
+<table>
+<tr><th>事件</th><th>触发时机</th><th>什么时候用</th></tr>
+<tr><td><code>PreToolUse</code></td><td>agent 调用工具<strong>之前</strong></td><td>拦截危险操作、修改工具参数</td></tr>
+<tr><td><code>PostToolUse</code></td><td>agent 调用工具<strong>之后</strong></td><td>记录日志、校验输出结果</td></tr>
+<tr><td><code>Stop</code></td><td>agent 会话<strong>结束时</strong></td><td>清理临时文件、保存状态</td></tr>
+<tr><td><code>Notification</code></td><td>agent 完成<strong>任务通知</strong>时</td><td>桌面弹窗、触发下游流程</td></tr>
+<tr><td><code>SessionStart</code></td><td>会话<strong>开始时</strong></td><td>设置环境变量、预热缓存</td></tr>
+</table>
+
+<div class="note">
+  <div class="note-title">💡 我们选 PostToolUse</div>
+  <p>对初学者最友好的事件——不做任何干预，只是"观察" agent 的一举一动。安全、无副作用、可以随时删掉。</p>
+</div>
+
+<h2>你要创建的 Hook</h2>
+
+<p><strong>目标</strong>：每次 agent 调用任何工具后，自动把工具名和时间追加到一个日志文件。</p>
+
+<p><strong>效果</strong>：你对着 Claude Code 说一句话，然后去 <code>~/claude-tool-log.txt</code> 看看它刚才用了哪些工具。</p>
+
+<h2>动手步骤</h2>
+
+<div class="step">
+  <h3><span class="num">Step 1</span> · 打开配置文件</h3>
+  <p>打开 <code>.claude/settings.local.json</code>。它现在大概长这样（有 permissions 和 enabledPlugins）：</p>
+  <pre><code>{
+  "permissions": { "allow": [...] },
+  "enabledPlugins": { ... }
+}</code></pre>
+</div>
+
+<div class="step">
+  <h3><span class="num">Step 2</span> · 添加 hooks 字段</h3>
+  <p>在 <code>"enabledPlugins"</code> 那行的<strong>后面</strong>加一个逗号，然后加入这段：</p>
+  <pre><code>"hooks": {
+  "PostToolUse": [
+    {
+      "command": "echo \"[$(date '+%Y-%m-%d %H:%M:%S')] Called: $CLAUDE_TOOL_NAME\" >> ~/claude-tool-log.txt"
+    }
+  ]
+}</code></pre>
+  <p>完整的 JSON 结构应该是：</p>
+  <pre><code>{
+  "permissions": { "allow": [...] },
+  "enabledPlugins": { ... },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "command": "echo \"[$(date '+%Y-%m-%d %H:%M:%S')] Called: $CLAUDE_TOOL_NAME\" >> ~/claude-tool-log.txt"
+      }
+    ]
+  }
+}</code></pre>
+</div>
+
+<div class="step">
+  <h3><span class="num">Step 3</span> · 保存并重启 Claude Code</h3>
+  <p>保存文件后，<strong>重启 Claude Code 会话</strong>让新配置生效。然后对它说一句：</p>
+  <div class="terminal">
+    <span class="prompt">></span> <span class="cmd">帮我看看今天星期几</span>
+  </div>
+</div>
+
+<div class="step">
+  <h3><span class="num">Step 4</span> · 验证：查看日志</h3>
+  <p>执行完后，查看日志文件：</p>
+  <div class="terminal">
+    <span class="prompt">$</span> <span class="cmd">cat ~/claude-tool-log.txt</span>
+  </div>
+  <p>你应该能看到类似这样的输出：</p>
+  <div class="terminal">
+    <span class="out">[2026-06-22 14:35:01] Called: Bash</span>
+    <span class="out">[2026-06-22 14:35:02] Called: Read</span>
+  </div>
+  <p>这就是 agent 的"幕后动作"——你每说一句话，它可能调用了好几个工具。</p>
+</div>
+
+<h2>理解你刚做了什么</h2>
+
+<p>这个 hook 虽然只有一行命令，但涉及了几个关键概念：</p>
+
+<table>
+<tr><th>部分</th><th>含义</th></tr>
+<tr><td><code>"PostToolUse"</code></td><td>监听的事件类型——"工具调用后"触发</td></tr>
+<tr><td><code>"command": "..."</code></td><td>要执行的 shell 命令</td></tr>
+<tr><td><code>$CLAUDE_TOOL_NAME</code></td><td><strong>环境变量</strong>——Claude Code 自动注入，包含被调用的工具名</td></tr>
+<tr><td><code>>> ~/claude-tool-log.txt</code></td><td>追加到日志文件（不是覆盖）</td></tr>
+</table>
+
+<p>Hook 命令可以访问的环境变量包括：<code>$CLAUDE_TOOL_NAME</code>（工具名）、<code>$CLAUDE_TOOL_INPUT</code>（输入参数）等——这意味着你可以记录更丰富的信息。</p>
+
+<h2>进阶玩法（可选）</h2>
+
+<p>如果你只对<strong>特定工具</strong>感兴趣，可以加 <code>matcher</code> 字段：</p>
+
+<pre><code>{
+  "matcher": "Bash",
+  "command": "echo \"⚠️ Bash 被执行: $CLAUDE_TOOL_INPUT\" >> ~/bash-warnings.txt"
+}</code></pre>
+
+<p><code>matcher</code> 支持正则，比如 <code>"Bash|Write|Edit"</code> 匹配多个工具，<code>""</code>（空）匹配全部。</p>
+
+<h2>测验：你弄懂了吗？</h2>
+
+<div class="quiz" id="quiz">
+  <div class="q" id="q1">
+    <p>Q1. 你想在 agent 调用 <code>Write</code> 工具<strong>之前</strong>拦截并检查文件路径——用哪个事件？</p>
+    <div class="opts">
+      <div class="opt" data-v="a">A. PostToolUse</div>
+      <div class="opt" data-v="b">B. PreToolUse</div>
+      <div class="opt" data-v="c">C. Stop</div>
+    </div>
+    <div class="feedback" id="f1"></div>
+  </div>
+
+  <div class="q" id="q2">
+    <p>Q2. 你只想监控 <code>Bash</code> 和 <code>Write</code> 两个工具——怎么做？</p>
+    <div class="opts">
+      <div class="opt" data-v="a">A. 创建两个 hook</div>
+      <div class="opt" data-v="b">B. 用 matcher 正则</div>
+      <div class="opt" data-v="c">C. A 和 B 都可以</div>
+    </div>
+    <div class="feedback" id="f2"></div>
+  </div>
+</div>
+
+<h2>完成检查清单</h2>
+
+<ul class="checklist" id="checklist">
+  <li>在 settings.local.json 中添加了 hooks 配置</li>
+  <li>重启 Claude Code 后，对 agent 说了一句任意的话</li>
+  <li><code>cat ~/claude-tool-log.txt</code> 能看到工具调用记录</li>
+  <li>能用自己的话解释 <code>$CLAUDE_TOOL_NAME</code> 是什么</li>
+</ul>
+
+<h2>推荐阅读</h2>
+
+<p><a href="https://docs.anthropic.com/en/docs/claude-code/hooks" target="_blank">📄 Claude Code Hooks 官方文档</a></p>
+
+<p>官方文档列出了完整的事件类型、环境变量列表、以及更多配置选项。</p>
+
+<div class="footer">
+  <p>Hook 配置成功了？日志里看到了什么？<strong>直接把输出贴给老师看。</strong></p>
+  <p>没成功也没关系——把报错贴过来，老师帮你排查。</p>
+  <p style="margin-top:0.5rem;">
+    <a href="../reference/ai-glossary.html">📖 AI 术语表</a> ·
+    <a href="./0006-what-are-agents.html">← Lesson 6</a> ·
+    <a href="./0008-under-the-hood.html">→ Lesson 8（agent 内部机制）</a>
+  </p>
+</div>
+
+<script>
+(function() {
+  const answers = { q1: 'b', q2: 'c' };
+  const explanations = {
+    q1: { good: '✅ 正确！"之前"拦截就是 PreToolUse。', bad: '❌ 答案是 PreToolUse。Pre = 之前，Post = 之后——这个前缀是关键线索。' },
+    q2: { good: '✅ 两种方式都行——用正则更简洁，但逻辑上是等价的。', bad: '❌ 答案是 C（都可以）。用 matcher: "Bash|Write" 一行解决，或者写两个 hook 分别匹配——效果一样。' }
+  };
+
+  document.querySelectorAll('.q').forEach(q => {
+    const qid = q.id;
+    const correct = answers[qid];
+    const fb = document.getElementById('f' + qid.slice(1));
+
+    q.querySelectorAll('.opt').forEach(opt => {
+      opt.addEventListener('click', () => {
+        if (q.dataset.answered === 'true') return;
+        q.dataset.answered = 'true';
+
+        const v = opt.dataset.v;
+        q.querySelectorAll('.opt').forEach(o => {
+          if (o.dataset.v === correct) o.classList.add('correct');
+          if (o.dataset.v === v && v !== correct) o.classList.add('wrong');
+        });
+
+        fb.textContent = v === correct ? explanations[qid].good : explanations[qid].bad;
+        fb.className = 'feedback show ' + (v === correct ? 'good' : 'bad');
+      });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

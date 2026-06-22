@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 9 · Tool 与 MCP：Agent 的"手"如何接入世界</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .arch-diagram { margin: 2rem 0; text-align: center; }
+  .arch-diagram pre { display: inline-block; text-align: left; border-left: none; }
+  .arch-diagram code { font-size: 0.8rem; }
+
+  .quiz { margin: 2rem 0; }
+  .quiz .q { background: var(--code-bg); padding: 1.2rem 1.5rem; margin: 1.5rem 0; border-radius: 6px; }
+  .quiz .q p { margin-bottom: 0.8rem; font-weight: 600; }
+  .quiz .opts { display: flex; flex-direction: column; gap: 0.5rem; }
+  .quiz .opt { padding: 0.6rem 1rem; border: 1px solid var(--rule); border-radius: 4px; cursor: pointer; background: var(--bg); transition: background 0.15s; }
+  .quiz .opt:hover { background: #f0ece0; }
+  .quiz .opt.correct { border-color: #2a7d2a; background: #e8f5e8; }
+  .quiz .opt.wrong { border-color: var(--accent); background: #fde8e8; }
+  .quiz .feedback { margin-top: 0.8rem; font-size: 0.9rem; display: none; }
+  .quiz .feedback.show { display: block; }
+  .quiz .feedback.good { color: #2a7d2a; }
+  .quiz .feedback.bad { color: var(--accent); }
+
+  .checklist { list-style: none; margin-left: 0; }
+  .checklist li { padding: 0.3rem 0; }
+  .checklist li::before { content: "☐ "; color: var(--muted); }
+
+  .tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin: 1.2rem 0; }
+  .tool-card { background: var(--code-bg); padding: 0.8rem 1rem; border-radius: 4px; }
+  .tool-card .name { font-weight: 600; font-family: "SF Mono","Consolas","Monaco",monospace; font-size: 0.9rem; }
+  .tool-card .desc { font-size: 0.85rem; color: var(--muted); margin-top: 0.2rem; }
+</style>
+</head>
+<body>
+
+<h1>Lesson 9 · Tool 与 MCP：Agent 的"手"如何接入世界</h1>
+<p><small>上一篇：<a href="./0008-under-the-hood.html">Lesson 8 — Agent 的决策循环</a></small></p>
+
+<p>前面三节课你一直在学习 agent 的"大脑"——它怎么想。这节课看 agent 的<strong>"手"</strong>：它怎么行动。每个你在 hook 日志里看到的工具调用——Read、Write、Bash、Agent——都属于两种来源之一：<strong>内置 Tool</strong> 或 <strong>MCP Tool</strong>。</p>
+
+<h2>1. 什么是 Tool？</h2>
+
+<p>Tool（工具）是 agent 可以调用的<strong>具体能力</strong>。没有工具，agent 只是一张会说话的嘴——它能回答你，但不能操作文件、不能搜代码、不能执行命令。</p>
+
+<p>每个工具有三个要素：</p>
+
+<table>
+<tr><th>要素</th><th>说明</th><th>例子（Read）</th></tr>
+<tr><td><strong>名称</strong></td><td>agent 知道"这个东西叫什么"</td><td><code>Read</code></td></tr>
+<tr><td><strong>输入格式</strong></td><td>调用时需要传什么参数</td><td><code>file_path</code>（文件路径）、<code>offset</code>（从第几行开始）</td></tr>
+<tr><td><strong>输出格式</strong></td><td>工具返回什么</td><td>文件内容（带行号）</td></tr>
+</table>
+
+<p>你 hook 日志里出现过的所有工具，都在这一张表里：</p>
+
+<div class="tool-grid">
+  <div class="tool-card"><div class="name">Read</div><div class="desc">读取文件内容（文本/图片/PDF）</div></div>
+  <div class="tool-card"><div class="name">Write</div><div class="desc">创建或覆盖文件</div></div>
+  <div class="tool-card"><div class="name">Edit</div><div class="desc">精确替换文件中的一段文字</div></div>
+  <div class="tool-card"><div class="name">Bash</div><div class="desc">执行 Shell 命令</div></div>
+  <div class="tool-card"><div class="name">Glob</div><div class="desc">按通配符模式匹配文件路径</div></div>
+  <div class="tool-card"><div class="name">Grep</div><div class="desc">在文件内容中搜索正则表达式</div></div>
+  <div class="tool-card"><div class="name">Agent</div><div class="desc">启动子 agent 执行任务</div></div>
+  <div class="tool-card"><div class="name">WebFetch</div><div class="desc">抓取网页并提取内容</div></div>
+  <div class="tool-card"><div class="name">WebSearch</div><div class="desc">搜索网页</div></div>
+  <div class="tool-card"><div class="name">TaskCreate / TaskUpdate</div><div class="desc">创建和更新任务列表</div></div>
+</div>
+
+<p>这是内置工具——Claude Code 自带的。但你还可以<strong>接入外部工具</strong>——这就引入了 MCP。</p>
+
+<h2>2. 为什么需要 MCP？</h2>
+
+<p>假设你有一个公司内部的数据库，你想让 agent 直接查它。没有 MCP 的话，你只能：</p>
+
+<ol>
+  <li>自己写一个脚本查数据库</li>
+  <li>把结果粘贴到对话里</li>
+  <li>告诉 agent "根据这个结果做分析"</li>
+</ol>
+
+<p><strong>有了 MCP</strong>：agent 在决策循环中可以直接调用"查数据库"这个工具，就像调用 Read 一样自然。你在 hook 日志里看到的会是：</p>
+
+<div class="diagram">
+<pre>
+[16:30:01] Called: Read        ← 内置工具
+[16:30:03] Called: query_db    ← MCP 工具（你自己接的）
+[16:30:05] Called: Write       ← 内置工具
+</pre>
+</div>
+
+<h2>3. MCP 的架构：USB 类比</h2>
+
+<p>MCP（Model Context Protocol）是一个<strong>开放协议</strong>——不是 Anthropic 专有的。它的设计理念和 USB 一模一样：</p>
+
+<table>
+<tr><th>USB</th><th>MCP</th></tr>
+<tr><td>任何 USB 设备插入任何电脑，系统都能识别</td><td>任何 MCP Server 接入任何 Agent，agent 都能调用它的工具</td></tr>
+<tr><td>设备制造商只需遵循 USB 标准，不需考虑电脑品牌</td><td>工具开发者只需遵循 MCP 标准，不需考虑 AI 模型品牌</td></tr>
+<tr><td>U 盘、键盘、鼠标——都是 USB 设备</td><td>数据库、API、文件系统——都可以是 MCP Server</td></tr>
+</table>
+
+<p>架构很简单：</p>
+
+<div class="arch-diagram">
+<pre><code>
+┌──────────┐      MCP 协议       ┌──────────────┐
+│  Agent   │ ◄────────────────► │  MCP Server   │
+│(Claude)  │   请求: "执行工具X"  │ (你写的/别人写的) │
+│          │   响应: "结果如下"    │               │
+└──────────┘                     └───────┬───────┘
+                                         │
+                                    ┌────┴────┐
+                                    │ 数据库    │
+                                    │ API      │
+                                    │ 文件系统  │
+                                    └─────────┘
+</code></pre>
+</div>
+
+<p><strong>Agent 不知道 MCP Server 内部怎么实现的</strong>——它只知道"这个 Server 提供了哪些工具、每个工具接受什么参数"。就像你的电脑不关心 U 盘里面是 NAND 还是 NOR 闪存——它只需要知道"这是一个存储设备"。</p>
+
+<h2>4. 内置 Tool vs MCP Tool</h2>
+
+<table>
+<tr><th></th><th>内置 Tool</th><th>MCP Tool</th></tr>
+<tr><td><strong>谁提供的</strong></td><td>Claude Code 框架自带</td><td>外部 MCP Server（你自己或第三方）</td></tr>
+<tr><td><strong>怎么配置</strong></td><td>零配置，直接用</td><td>要在 <code>settings.json</code> 里注册 MCP Server</td></tr>
+<tr><td><strong>能干什么</strong></td><td>文件、搜索、命令、网络</td><td>任何你能编程实现的事——数据库、Jira、Slack、天气预报……</td></tr>
+<tr><td><strong>例子</strong></td><td>Read, Write, Bash, Grep</td><td>查 GitHub Issue、读 Google Sheets、调公司内部 API</td></tr>
+<tr><td><strong>在 agent 眼里</strong></td><td>一样的：都是一个可调用的工具</td><td>一样的：都是一个可调用的工具</td></tr>
+</table>
+
+<div class="note">
+  <div class="note-title">🔑 关键洞察</div>
+  <p>对 agent 的决策循环来说，内置工具和 MCP 工具<strong>没有区别</strong>。它在 Think 阶段看到的是一个统一的"工具菜单"——不管是框架自带的还是你通过 MCP 接入的，都是菜单上的一道菜。</p>
+</div>
+
+<h2>5. 一个具体的 MCP 配置示例</h2>
+
+<p>在 <code>settings.json</code> 中添加一个 MCP Server：</p>
+
+<pre><code>{
+  "mcpServers": {
+    "github": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/"
+    },
+    "my-database": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["./mcp-servers/db-server.js"],
+      "env": {
+        "DB_HOST": "localhost"
+      }
+    }
+  }
+}</code></pre>
+
+<p>两种类型：</p>
+<ul>
+  <li><strong><code>type: "http"</code></strong>——MCP Server 跑在远程服务器上，Agent 通过 HTTP 调它</li>
+  <li><strong><code>type: "stdio"</code></strong>——MCP Server 跑在本地，Agent 启动一个进程然后通过标准输入/输出通信</li>
+</ul>
+
+<p>配置完之后，重启 Claude Code——agent 的"工具菜单"里就多了你接入的那些工具。</p>
+
+<h2>测验：Tool 和 MCP 你弄懂了吗？</h2>
+
+<div class="quiz" id="quiz">
+  <div class="q" id="q1">
+    <p>Q1. 以下哪个<strong>不是</strong> agent 的内置工具？</p>
+    <div class="opts">
+      <div class="opt" data-v="a">A. Grep（正则搜索）</div>
+      <div class="opt" data-v="b">B. Glob（匹配文件）</div>
+      <div class="opt" data-v="c">C. query_database（查数据库）</div>
+    </div>
+    <div class="feedback" id="f1"></div>
+  </div>
+
+  <div class="q" id="q2">
+    <p>Q2. MCP 的核心理念是什么？</p>
+    <div class="opts">
+      <div class="opt" data-v="a">A. 让 agent 跑得更快</div>
+      <div class="opt" data-v="b">B. 统一 agent 和外部工具的连接标准</div>
+      <div class="opt" data-v="c">C. 替换 agent 的内置工具</div>
+    </div>
+    <div class="feedback" id="f2"></div>
+  </div>
+
+  <div class="q" id="q3">
+    <p>Q3. 对 agent 的决策循环来说，内置工具和 MCP 工具有区别吗？</p>
+    <div class="opts">
+      <div class="opt" data-v="a">A. 有——agent 优先用内置的</div>
+      <div class="opt" data-v="b">B. 有——MCP 工具需要额外审批</div>
+      <div class="opt" data-v="c">C. 没有——它们都在同一个工具菜单里</div>
+    </div>
+    <div class="feedback" id="f3"></div>
+  </div>
+</div>
+
+<h2>你的动手练习</h2>
+
+<ol>
+  <li><strong>打开你的 settings.local.json</strong>——看看有没有 <code>"mcpServers"</code> 字段（大概率没有——这就是你下一步要配的）</li>
+  <li><strong>去 MCP 官方仓库逛一圈</strong>——<a href="https://github.com/modelcontextprotocol/servers" target="_blank">github.com/modelcontextprotocol/servers</a>，看看别人都写了什么 MCP Server（有 Slack、GitHub、Google Drive、PostgreSQL……）</li>
+  <li><strong>看看你的 hook 日志</strong>——现在你应该能认出所有出现的工具名分别是什么能力了</li>
+  <li><strong>心里过一遍</strong>——如果你想写一个 MCP Server 让 agent 访问你自己的数据库，你需要提供什么？（提示：工具名称、输入格式、输出格式）</li>
+</ol>
+
+<h2>完成检查清单</h2>
+
+<ul class="checklist">
+  <li>能列出至少 5 个 agent 内置工具并说出各自的作用</li>
+  <li>能用自己的话解释"内置 Tool"和"MCP Tool"的区别</li>
+  <li>能解释 MCP 为什么被类比为 USB</li>
+  <li>查看了 settings.local.json，确认当前是否有 MCP 配置</li>
+  <li>逛了 MCP 官方仓库，至少看了 3 个不同的 MCP Server 介绍</li>
+</ul>
+
+<h2>推荐阅读</h2>
+
+<ul>
+  <li><a href="https://modelcontextprotocol.io/" target="_blank">📄 MCP 官方文档（modelcontextprotocol.io）</a>——规范全文 + 入门教程</li>
+  <li><a href="https://github.com/modelcontextprotocol/servers" target="_blank">📦 MCP Servers 官方仓库</a>——社区贡献的现成 MCP Server 合集</li>
+  <li><a href="https://docs.anthropic.com/en/docs/claude-code/mcp" target="_blank">📄 Claude Code MCP 配置文档</a>——Claude Code 中如何配置 MCP 的具体语法</li>
+</ul>
+
+<div class="footer">
+  <p>看完 MCP 仓库有什么想法？想给你的 agent 接什么外部工具？<strong>直接告诉 AI 老师</strong>——下节课可以手把手教你配置第一个 MCP Server。</p>
+  <p style="margin-top:0.5rem;">
+    <a href="../reference/ai-glossary.html">📖 AI 术语表</a> ·
+    <a href="./0008-under-the-hood.html">← Lesson 8（决策循环）</a> ·
+    <a href="./0010-workflow-basics.html">→ Lesson 10（Workflow 基础）</a>
+  </p>
+</div>
+
+<script>
+(function() {
+  const answers = { q1: 'c', q2: 'b', q3: 'c' };
+  const explanations = {
+    q1: { good: '✅ 正确！query_database 不是你默认能用的——它需要通过 MCP 接入。Read、Glob、Grep、Bash 都是内置的。', bad: '❌ 答案是 query_database。Read、Glob、Grep 都是 Claude Code 内置工具，query_database 必须通过 MCP 接入。' },
+    q2: { good: '✅ 正确！MCP = Model Context Protocol，核心就是统一连接标准——让任何工具能接入任何 agent。', bad: '❌ 答案是"统一连接标准"。MCP 不改变 agent 的性能，也不替换内置工具——它定义的是 agent 和外部工具之间的通信协议。' },
+    q3: { good: '✅ 正确！Agent 在 Think 阶段看到一个统一的工具列表——不管是框架自带的还是 MCP 接入的，都是可调用的工具。', bad: '❌ 答案是没有区别。对 agent 的决策循环来说，所有工具都在同一个列表里——它不区分"这个来自框架"还是"这个来自 MCP"。这正是 MCP 设计的美妙之处。' }
+  };
+
+  document.querySelectorAll('.q').forEach(q => {
+    const qid = q.id;
+    const correct = answers[qid];
+    const fb = document.getElementById('f' + qid.slice(1));
+
+    q.querySelectorAll('.opt').forEach(opt => {
+      opt.addEventListener('click', () => {
+        if (q.dataset.answered === 'true') return;
+        q.dataset.answered = 'true';
+        const v = opt.dataset.v;
+        q.querySelectorAll('.opt').forEach(o => {
+          if (o.dataset.v === correct) o.classList.add('correct');
+          if (o.dataset.v === v && v !== correct) o.classList.add('wrong');
+        });
+        fb.textContent = v === correct ? explanations[qid].good : explanations[qid].bad;
+        fb.className = 'feedback show ' + (v === correct ? 'good' : 'bad');
+      });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 6 · Agent、Hook、Skill：AI 工具的三种积木</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* Quiz styles */
+  .quiz { margin: 2rem 0; }
+  .quiz .q { background: var(--code-bg); padding: 1.2rem 1.5rem; margin: 1.5rem 0; border-radius: 6px; }
+  .quiz .q p { margin-bottom: 0.8rem; font-weight: 600; }
+  .quiz .opts { display: flex; flex-direction: column; gap: 0.5rem; }
+  .quiz .opt { padding: 0.6rem 1rem; border: 1px solid var(--rule); border-radius: 4px; cursor: pointer; background: var(--bg); transition: background 0.15s; }
+  .quiz .opt:hover { background: #f0ece0; }
+  .quiz .opt.selected { border-color: var(--accent); background: #fdf0f0; }
+  .quiz .opt.correct { border-color: #2a7d2a; background: #e8f5e8; }
+  .quiz .opt.wrong { border-color: var(--accent); background: #fde8e8; }
+  .quiz .feedback { margin-top: 0.8rem; font-size: 0.9rem; display: none; }
+  .quiz .feedback.show { display: block; }
+  .quiz .feedback.good { color: #2a7d2a; }
+  .quiz .feedback.bad { color: var(--accent); }
+  .quiz button { margin-top: 1rem; padding: 0.5rem 1.2rem; font-size: 0.95rem; border: 1px solid var(--accent); background: var(--bg); color: var(--accent); border-radius: 4px; cursor: pointer; }
+  .quiz button:hover { background: var(--accent); color: #fff; }
+
+  /* Relationship diagram */
+  .rel-diagram { margin: 2rem 0; text-align: center; }
+  .rel-diagram svg { max-width: 100%; }
+
+  /* Table compare */
+  .compare th:first-child { width: 20%; }
+</style>
+</head>
+<body>
+
+<h1>Lesson 6 · Agent、Hook、Skill：AI 工具的三块积木</h1>
+
+<p>你现在用的 Claude Code、未来要搭建的 agent 系统——它们都建立在三块基本积木之上：<strong>Agent</strong>（干活的人）、<strong>Hook</strong>（自动触发器）、<strong>Skill</strong>（技能包）。理解这三者的区别和关系，是搭建任何 AI 系统的第一步。</p>
+
+<h2>1. Agent（智能体）——"干活的人"</h2>
+
+<p>一个 <strong>agent</strong> 是一个能<strong>自主执行任务</strong>的 AI 程序。你给它一个目标，它自己决定：</p>
+
+<ul>
+  <li>用什么工具（读文件？搜代码？调 API？）</li>
+  <li>按什么顺序做事</li>
+  <li>遇到问题怎么处理</li>
+</ul>
+
+<p>你现在对 Claude Code 说的每一句话，背后就是一个 agent 在工作。你告诉它"修复这个 bug"，它自己去找文件、读代码、编辑、运行测试——不需要你一步步指挥。</p>
+
+<div class="note">
+  <div class="note-title">💡 关键区别：Agent ≠ 聊天机器人</div>
+  <p>聊天机器人只会"回答你这句话"。Agent 会<strong>采取行动</strong>——操作文件、运行命令、调用工具。它有"手"，不只是"嘴"。</p>
+</div>
+
+<h2>2. Hook（钩子）——"到什么节点就自动做什么"</h2>
+
+<p>一个 <strong>hook</strong> 是在特定事件发生时<strong>自动触发</strong>的脚本。它不自己干活，它决定"<strong>什么时候</strong>让什么发生"。</p>
+
+<p>Claude Code 支持多种 hook 事件，比如：</p>
+
+<table>
+<tr><th>Hook 事件</th><th>什么时候触发</th><th>典型用途</th></tr>
+<tr><td><code>PostToolUse</code></td><td>agent 调用工具之后</td><td>校验工具输出、记录日志</td></tr>
+<tr><td><code>Notification</code></td><td>agent 完成一个任务时</td><td>桌面通知、触发下游流程</td></tr>
+<tr><td><code>Stop</code></td><td>agent 会话停止时</td><td>清理临时文件、保存状态</td></tr>
+<tr><td><code>PreToolUse</code></td><td>agent 调用工具之前</td><td>权限拦截、输入校验</td></tr>
+</table>
+
+<div class="note">
+  <div class="note-title">🎯 你可以现在就试试</div>
+  <p>打开 <code>.claude/settings.json</code>，搜索 <code>"hooks"</code>——你很可能已经有一些 hook 配置。看看它们监听了什么事件，做了什么动作。</p>
+</div>
+
+<h2>3. Skill（技能）——"遇到这种事，按这套流程做"</h2>
+
+<p>一个 <strong>skill</strong> 是一个打包好的<strong>指令集</strong>，告诉 agent：当用户要做某类事情时，你应该怎么做。</p>
+
+<p>一个 skill 通常包含：</p>
+<ul>
+  <li><strong>名称和描述</strong>——什么时候应该激活这个 skill</li>
+  <li><strong>步骤指令</strong>——激活后 agent 应该遵循的流程</li>
+  <li><strong>可用工具</strong>——这个 skill 可以使用哪些特殊工具</li>
+</ul>
+
+<p>比如你现在用的 <code>/teach</code> 就是一个 skill——它告诉 agent："当用户说 /teach 时，你就是一个老师，读取学习记录、设计课程、写 HTML……"</p>
+
+<div class="note">
+  <div class="note-title">🎯 你可以现在就试试</div>
+  <p>打开 <code>.claude/skills/teach/SKILL.md</code>——这就是 teach skill 的指令文件。读一下开头几段，你会看到"你是一个老师"的设定。</p>
+</div>
+
+<h2>三者的关系</h2>
+
+<p>把它们放在一起看：</p>
+
+<div class="diagram">
+<pre>
+┌─────────────────────────────────────────┐
+│              Skill（技能）               │
+│  "面对这类任务，按这套流程做"             │
+│  ┌───────────────────────────────────┐  │
+│  │         Agent（智能体）            │  │
+│  │  "我接到任务，我决定怎么做"         │  │
+│  │  ┌──────────┐  ┌──────────┐      │  │
+│  │  │  Tool 1  │  │  Tool 2  │ ...  │  │
+│  │  └──────────┘  └──────────┘      │  │
+│  └───────────────────────────────────┘  │
+│         ↑                    ↑          │
+│     Hook 触发          Hook 触发         │
+│  (PreToolUse)        (PostToolUse)       │
+└─────────────────────────────────────────┘
+</pre>
+</div>
+
+<table class="compare">
+<tr><th>积木</th><th>职责</th><th>类比</th></tr>
+<tr><td><strong>Agent</strong></td><td>接收目标 → 自主决策 → 执行任务</td><td>员工</td></tr>
+<tr><td><strong>Hook</strong></td><td>监听事件 → 自动触发脚本</td><td>闹钟 / 传感器</td></tr>
+<tr><td><strong>Skill</strong></td><td>定义"面对 X 时该怎么做"</td><td>SOP 手册</td></tr>
+</table>
+
+<p>简单总结：<strong>Skill 告诉 Agent 怎么做，Hook 在特定时刻自动帮 Agent 做事。</strong></p>
+
+<h2>测验：你分得清吗？</h2>
+
+<div class="quiz" id="quiz">
+  <div class="q" id="q1">
+    <p>Q1. "每次 agent 调用工具后，自动把工具输出写到日志文件"——这是用什么实现？</p>
+    <div class="opts">
+      <div class="opt" data-v="a">A. Agent</div>
+      <div class="opt" data-v="b">B. Hook</div>
+      <div class="opt" data-v="c">C. Skill</div>
+    </div>
+    <div class="feedback" id="f1"></div>
+  </div>
+
+  <div class="q" id="q2">
+    <p>Q2. "当用户说 /review 时，你应该变成一个代码审查员，检查代码的 bug 和风格问题"——这是什么？</p>
+    <div class="opts">
+      <div class="opt" data-v="a">A. Agent</div>
+      <div class="opt" data-v="b">B. Hook</div>
+      <div class="opt" data-v="c">C. Skill</div>
+    </div>
+    <div class="feedback" id="f2"></div>
+  </div>
+
+  <div class="q" id="q3">
+    <p>Q3. "修复 src/utils.ts 里的 bug"——这句话交给谁去执行？</p>
+    <div class="opts">
+      <div class="opt" data-v="a">A. Agent</div>
+      <div class="opt" data-v="b">B. Hook</div>
+      <div class="opt" data-v="c">C. Skill</div>
+    </div>
+    <div class="feedback" id="f3"></div>
+  </div>
+</div>
+
+<h2>你的动手练习</h2>
+
+<p>学完这节课，做三件事来巩固：</p>
+
+<ol>
+  <li><strong>找到你本地的 skill 文件</strong>——打开 <code>.claude/skills/teach/SKILL.md</code>，读前 30 行，找到"你是一个……"那一段</li>
+  <li><strong>找到你本地的 hook 配置</strong>——打开 <code>.claude/settings.json</code>，搜索 <code>"hooks"</code>，看看有哪些 hook</li>
+  <li><strong>用自己的话回答</strong>：你现在用的 /teach 命令，为什么是一个 skill 而不是 hook？</li>
+</ol>
+
+<h2>推荐阅读</h2>
+
+<p>这节课的很多概念来自 Anthropic 的官方文章：</p>
+
+<p><a href="https://www.anthropic.com/research/building-effective-agents" target="_blank">📄 "Building Effective Agents" — Anthropic Research</a></p>
+
+<p>这是目前关于 agent 系统设计最权威的免费资源。中文可以配合翻译工具阅读，但建议至少读一遍英文原文的标题和小标题，熟悉术语。</p>
+
+<div class="footer">
+  <p>有不清楚的地方？<strong>直接问你的 AI 老师。</strong>说"老师，skill 和 hook 的区别我还是不太清楚"——老师会换一种方式再解释一遍。</p>
+  <p style="margin-top:0.5rem;">
+    <a href="../reference/ai-glossary.html">📖 AI 术语表</a> ·
+    <a href="./0005-daily-workflow.html">← Lesson 5（Git 工作流）</a> ·
+    <a href="./0007-under-the-hood.html">→ Lesson 7（agent 内部机制）</a>
+  </p>
+</div>
+
+<script>
+(function() {
+  const answers = { q1: 'b', q2: 'c', q3: 'a' };
+  const explanations = {
+    q1: { good: '✅ 正确！"在某个事件发生时自动执行"就是 Hook 的职责。', bad: '❌ 答案是 Hook。"每次……后自动"这个触发条件——正是 Hook 的特征。' },
+    q2: { good: '✅ 正确！定义"面对某类任务时该怎么做"——这就是 Skill。', bad: '❌ 答案是 Skill。它在定义一套行为规范——"当用户要你做 X 时，你应该怎么做"。' },
+    q3: { good: '✅ 正确！接收目标、自主执行——这是 Agent 的活。', bad: '❌ 答案是 Agent。执行具体任务的是 Agent，不是 Skill 或 Hook。' }
+  };
+
+  document.querySelectorAll('.q').forEach(q => {
+    const qid = q.id;
+    const correct = answers[qid];
+    const fb = document.getElementById('f' + qid.slice(1));
+
+    q.querySelectorAll('.opt').forEach(opt => {
+      opt.addEventListener('click', () => {
+        // 防止重复点击
+        if (q.dataset.answered === 'true') return;
+        q.dataset.answered = 'true';
+
+        const v = opt.dataset.v;
+
+        // 高亮所有选项
+        q.querySelectorAll('.opt').forEach(o => {
+          if (o.dataset.v === correct) o.classList.add('correct');
+          if (o.dataset.v === v && v !== correct) o.classList.add('wrong');
+        });
+
+        // 显示反馈
+        if (v === correct) {
+          fb.textContent = explanations[qid].good;
+          fb.className = 'feedback show good';
+        } else {
+          fb.textContent = explanations[qid].bad;
+          fb.className = 'feedback show bad';
+        }
+      });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
